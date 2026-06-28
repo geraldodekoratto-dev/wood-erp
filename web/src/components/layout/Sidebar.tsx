@@ -16,7 +16,7 @@ const navItems = [
   { label: 'Kanban', icon: Kanban, to: '/pcp/kanban' },
   { label: 'Vendas', icon: ShoppingCart, to: '/vendas', disabled: true },
   { label: 'Estoque', icon: Package, to: '/estoque', disabled: true },
-  { label: 'Clientes', icon: Users, to: '/clientes', disabled: true },
+  { label: 'Clientes', icon: Users, to: '/clientes' },
 ]
 
 export default function Sidebar({ collapsed, onToggle }: Props) {
