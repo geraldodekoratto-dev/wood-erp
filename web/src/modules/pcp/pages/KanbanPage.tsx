@@ -99,20 +99,21 @@ export default function KanbanPage() {
           </div>
         </div>
       ) : (
-        <div className="flex gap-3 pb-4"
-          style={{ overflowX: 'auto', width: 'calc(100vw - 256px - 64px)', scrollbarWidth: 'thin' }}>
-          {KANBAN_COLUMNS.map(status => (
-            <KanbanColumn
-              key={status}
-              status={status}
-              orders={ordersByStatus(status)}
-              onDragStart={handleDragStart}
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              isDragOver={dragOverStatus === status}
-            />
-          ))}
+        <div className="overflow-x-auto pb-4" style={{ scrollbarWidth: 'thin' }}>
+          <div className="flex gap-3" style={{ minWidth: 'max-content' }}>
+            {KANBAN_COLUMNS.map(status => (
+              <KanbanColumn
+                key={status}
+                status={status}
+                orders={ordersByStatus(status)}
+                onDragStart={handleDragStart}
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                isDragOver={dragOverStatus === status}
+              />
+            ))}
+          </div>
         </div>
       )}
     </div>

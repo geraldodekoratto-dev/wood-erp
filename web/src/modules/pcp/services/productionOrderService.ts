@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import type { ProductionOrder, CreateProductionOrderInput, ProductionOrderStatus } from '../types'
+import type { ProductionOrder, CreateProductionOrderInput, UpdateProductionOrderInput, ProductionOrderStatus } from '../types'
 
 function generateReference(): string {
   const year = new Date().getFullYear()
@@ -50,6 +50,38 @@ export async function updateOrderStatus(id: string, status: ProductionOrderStatu
     .eq('id', id)
 
   if (error) throw new Error(error.message)
+}
+
+export async function getOrderById(id: string): Promise<ProductionOrder> {
+  const { data, error } = await supabase
+    .from('production_order')
+    .select('*')
+    .eq('id', id)
+    .is('deleted_at', null)
+    .single()
+
+  if (error) throw new Error(error.message)
+  return data as ProductionOrder
+}
+
+export async function updateProductionOrder(id: string, input: UpdateProductionOrderInput): Promise<ProductionOrder> {
+  const { data, error } = await supabase
+    .from('production_order')
+    .update({
+      client_name: input.client_name,
+      project_name: input.project_name,
+      priority: input.priority,
+      sale_date: input.sale_date || null,
+      delivery_date: input.delivery_date || null,
+      notes: input.notes || null,
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', id)
+    .select()
+    .single()
+
+  if (error) throw new Error(error.message)
+  return data as ProductionOrder
 }
 
 export async function deleteProductionOrder(id: string): Promise<void> {

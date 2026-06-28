@@ -37,6 +37,15 @@ export interface CreateProductionOrderInput {
   notes: string
 }
 
+export interface UpdateProductionOrderInput {
+  client_name: string
+  project_name: string
+  priority: ProductionOrderPriority
+  sale_date: string
+  delivery_date: string
+  notes: string
+}
+
 export const STATUS_LABELS: Record<ProductionOrderStatus, string> = {
   aguardando_conferencia: 'Aguardando Conferência',
   em_projeto: 'Em Projeto',

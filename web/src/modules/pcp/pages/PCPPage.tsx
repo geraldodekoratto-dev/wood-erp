@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Plus, Search, RefreshCw, Factory } from 'lucide-react'
 import { listProductionOrders, updateOrderStatus } from '../services/productionOrderService'
 import type { ProductionOrder, ProductionOrderStatus } from '../types'
@@ -17,6 +18,7 @@ function formatDate(date: string | null) {
 }
 
 export default function PCPPage() {
+  const navigate = useNavigate()
   const [orders, setOrders] = useState<ProductionOrder[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -137,10 +139,14 @@ export default function PCPPage() {
               </tr>
             ) : filtered.map((order, i) => (
               <tr key={order.id}
+                onClick={() => navigate(`/pcp/${order.id}`)}
                 style={{
                   background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
                   borderBottom: '1px solid rgba(255,255,255,0.04)',
-                }}>
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,200,150,0.05)')}
+                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)')}>
                 <td className="px-4 py-3.5">
                   <span className="text-sm font-mono font-medium" style={{ color: '#00c896' }}>
                     {order.reference_number}
@@ -165,7 +171,7 @@ export default function PCPPage() {
                     {formatDate(order.delivery_date)}
                   </span>
                 </td>
-                <td className="px-4 py-3.5">
+                <td className="px-4 py-3.5" onClick={e => e.stopPropagation()}>
                   {order.status !== 'entregue' && order.status !== 'cancelado' ? (
                     <select
                       disabled={updatingId === order.id}

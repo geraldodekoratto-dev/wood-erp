@@ -6,6 +6,7 @@ import LoginPage from '@/pages/LoginPage'
 import DashboardPage from '@/pages/DashboardPage'
 import PCPPage from '@/modules/pcp/pages/PCPPage'
 import KanbanPage from '@/modules/pcp/pages/KanbanPage'
+import OrderDetailPage from '@/modules/pcp/pages/OrderDetailPage'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/pcp" element={<PCPPage />} />
             <Route path="/pcp/kanban" element={<KanbanPage />} />
+            <Route path="/pcp/:id" element={<OrderDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
