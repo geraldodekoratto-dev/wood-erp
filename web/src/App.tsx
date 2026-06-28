@@ -5,6 +5,7 @@ import AppLayout from '@/components/layout/AppLayout'
 import LoginPage from '@/pages/LoginPage'
 import DashboardPage from '@/pages/DashboardPage'
 import PCPPage from '@/modules/pcp/pages/PCPPage'
+import KanbanPage from '@/modules/pcp/pages/KanbanPage'
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           }>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/pcp" element={<PCPPage />} />
+            <Route path="/pcp/kanban" element={<KanbanPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

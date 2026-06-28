@@ -5,7 +5,7 @@ export default function AppLayout() {
   return (
     <div className="flex min-h-screen" style={{ background: '#0a1628' }}>
       <Sidebar />
-      <main className="flex-1 ml-64 p-8 overflow-auto">
+      <main className="ml-64 p-8" style={{ minHeight: '100vh' }}>
         <Outlet />
       </main>
     </div>

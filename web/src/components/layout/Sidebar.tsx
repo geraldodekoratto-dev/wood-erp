@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import {
-  LayoutDashboard, Factory, ShoppingCart, Package,
+  LayoutDashboard, Factory, Kanban, ShoppingCart, Package,
   Users, Settings, LogOut, ChevronRight
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
@@ -8,6 +8,7 @@ import { useAuth } from '@/contexts/AuthContext'
 const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
   { label: 'PCP — Produção', icon: Factory, to: '/pcp' },
+  { label: 'Kanban', icon: Kanban, to: '/pcp/kanban' },
   { label: 'Vendas', icon: ShoppingCart, to: '/vendas', disabled: true },
   { label: 'Estoque', icon: Package, to: '/estoque', disabled: true },
   { label: 'Clientes', icon: Users, to: '/clientes', disabled: true },
