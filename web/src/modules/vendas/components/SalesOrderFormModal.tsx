@@ -212,9 +212,9 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
                 <label style={lbl}>Forma de Pagamento</label>
                 <select style={{ ...inp, cursor: 'pointer' }} value={form.payment_method}
                   onChange={e => set('payment_method', e.target.value as PaymentMethod | '')}>
-                  <option value="">— Selecionar —</option>
+                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
                   {(Object.entries(PAYMENT_METHOD_LABELS) as [PaymentMethod, string][]).map(([k, v]) => (
-                    <option key={k} value={k}>{v}</option>
+                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
                   ))}
                 </select>
               </div>

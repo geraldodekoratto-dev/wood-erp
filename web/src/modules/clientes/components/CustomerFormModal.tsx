@@ -257,8 +257,8 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
                     <label style={labelStyle}>UF</label>
                     <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.state}
                       onChange={e => set('state', e.target.value)}>
-                      <option value="">—</option>
-                      {BRAZIL_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+                      <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>—</option>
+                      {BRAZIL_STATES.map(s => <option key={s} value={s} style={{ background: '#1e293b', color: '#e2e8f0' }}>{s}</option>)}
                     </select>
                   </div>
                 </div>

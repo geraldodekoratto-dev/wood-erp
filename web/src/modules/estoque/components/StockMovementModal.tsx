@@ -120,9 +120,9 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
               <select style={{ ...inp, cursor: 'pointer' }}
                 value={form.reason}
                 onChange={e => setForm(f => ({ ...f, reason: e.target.value as MovementReason | '' }))}>
-                <option value="">— Selecionar —</option>
+                <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
                 {REASONS_BY_TYPE[form.type].map(r => (
-                  <option key={r} value={r}>{REASON_LABELS[r]}</option>
+                  <option key={r} value={r} style={{ background: '#1e293b', color: '#e2e8f0' }}>{REASON_LABELS[r]}</option>
                 ))}
               </select>
             </div>

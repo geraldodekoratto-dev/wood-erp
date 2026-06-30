@@ -117,9 +117,9 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
                 <select style={{ ...inp, cursor: 'pointer' }}
                   value={form.category}
                   onChange={e => set('category', e.target.value as StockCategory | '')}>
-                  <option value="">— Selecionar —</option>
+                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
                   {(Object.entries(CATEGORY_LABELS) as [StockCategory, string][]).map(([k, v]) => (
-                    <option key={k} value={k}>{v}</option>
+                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
                   ))}
                 </select>
               </div>
@@ -128,9 +128,9 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
                 <select style={{ ...inp, cursor: 'pointer' }}
                   value={form.unit}
                   onChange={e => set('unit', e.target.value as StockUnit | '')}>
-                  <option value="">— Selecionar —</option>
+                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
                   {(Object.entries(UNIT_LABELS) as [StockUnit, string][]).map(([k, v]) => (
-                    <option key={k} value={k}>{v}</option>
+                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
                   ))}
                 </select>
               </div>
