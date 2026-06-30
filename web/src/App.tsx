@@ -9,6 +9,8 @@ import KanbanPage from '@/modules/pcp/pages/KanbanPage'
 import OrderDetailPage from '@/modules/pcp/pages/OrderDetailPage'
 import CustomersPage from '@/modules/clientes/pages/CustomersPage'
 import CustomerDetailPage from '@/modules/clientes/pages/CustomerDetailPage'
+import SalesPage from '@/modules/vendas/pages/SalesPage'
+import SalesDetailPage from '@/modules/vendas/pages/SalesDetailPage'
 
 export default function App() {
   return (
@@ -28,6 +30,8 @@ export default function App() {
             <Route path="/pcp/:id" element={<OrderDetailPage />} />
             <Route path="/clientes" element={<CustomersPage />} />
             <Route path="/clientes/:id" element={<CustomerDetailPage />} />
+            <Route path="/vendas" element={<SalesPage />} />
+            <Route path="/vendas/:id" element={<SalesDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

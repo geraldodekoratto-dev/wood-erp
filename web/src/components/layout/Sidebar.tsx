@@ -14,7 +14,7 @@ const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
   { label: 'PCP — Produção', icon: Factory, to: '/pcp' },
   { label: 'Kanban', icon: Kanban, to: '/pcp/kanban' },
-  { label: 'Vendas', icon: ShoppingCart, to: '/vendas', disabled: true },
+  { label: 'Vendas', icon: ShoppingCart, to: '/vendas' },
   { label: 'Estoque', icon: Package, to: '/estoque', disabled: true },
   { label: 'Clientes', icon: Users, to: '/clientes' },
 ]
