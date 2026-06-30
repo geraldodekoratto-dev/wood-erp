@@ -11,6 +11,8 @@ import CustomersPage from '@/modules/clientes/pages/CustomersPage'
 import CustomerDetailPage from '@/modules/clientes/pages/CustomerDetailPage'
 import SalesPage from '@/modules/vendas/pages/SalesPage'
 import SalesDetailPage from '@/modules/vendas/pages/SalesDetailPage'
+import StockPage from '@/modules/estoque/pages/StockPage'
+import StockItemDetailPage from '@/modules/estoque/pages/StockItemDetailPage'
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="/clientes/:id" element={<CustomerDetailPage />} />
             <Route path="/vendas" element={<SalesPage />} />
             <Route path="/vendas/:id" element={<SalesDetailPage />} />
+            <Route path="/estoque" element={<StockPage />} />
+            <Route path="/estoque/:id" element={<StockItemDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
