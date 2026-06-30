@@ -57,7 +57,7 @@ export default function StockPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#0f172a' }}>
             <Package size={26} style={{ color: '#00c896' }} />
             Estoque
           </h1>
@@ -68,7 +68,7 @@ export default function StockPage() {
         <div className="flex items-center gap-3">
           <button onClick={load}
             className="p-2.5 rounded-lg transition-all"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#64748b' }}>
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
             <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
           </button>
           <button onClick={() => setShowNew(true)}
@@ -90,7 +90,7 @@ export default function StockPage() {
         <SummaryCard
           label="Estoque Baixo"
           value={String(lowStock)}
-          valueColor={lowStock > 0 ? '#fbbf24' : '#475569'}
+          valueColor={lowStock > 0 ? '#fbbf24' : '#64748b'}
           icon={lowStock > 0 ? <AlertTriangle size={14} /> : undefined}
           iconColor="#fbbf24"
           onClick={() => setStatusFilter(statusFilter === 'baixo' ? '' : 'baixo')}
@@ -99,7 +99,7 @@ export default function StockPage() {
         <SummaryCard
           label="Estoque Zerado"
           value={String(zeroStock)}
-          valueColor={zeroStock > 0 ? '#f87171' : '#475569'}
+          valueColor={zeroStock > 0 ? '#f87171' : '#64748b'}
           icon={zeroStock > 0 ? <XCircle size={14} /> : undefined}
           iconColor="#f87171"
           onClick={() => setStatusFilter(statusFilter === 'zerado' ? '' : 'zerado')}
@@ -110,45 +110,45 @@ export default function StockPage() {
       {/* Filtros */}
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Buscar por nome, código ou fornecedor..."
             className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm outline-none"
-            style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0' }} />
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a' }} />
         </div>
         <select value={categoryFilter} onChange={e => setCategoryFilter(e.target.value)}
           className="px-3 py-2.5 rounded-lg text-sm outline-none"
-          style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0', cursor: 'pointer' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer' }}>
           {CATEGORY_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </div>
 
       {/* Tabela */}
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+      <div className="rounded-xl overflow-hidden shadow-sm" style={{ border: '1px solid #e2e8f0' }}>
         <table className="w-full">
           <thead>
-            <tr style={{ background: '#0f2040', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <tr style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
               {['Código', 'Nome', 'Categoria', 'Saldo Atual', 'Mínimo', 'Custo Unit.', 'Status'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: '#475569' }}>{h}</th>
+                  style={{ color: '#64748b' }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={7} className="py-16 text-center" style={{ color: '#475569' }}>
+              <tr><td colSpan={7} className="py-16 text-center" style={{ color: '#64748b' }}>
                 <RefreshCw size={20} className="animate-spin mx-auto mb-2" />Carregando estoque...
               </td></tr>
             ) : loadError ? (
               <tr><td colSpan={7} className="py-16 text-center">
                 <p className="text-sm font-medium mb-1" style={{ color: '#f87171' }}>Erro ao carregar estoque</p>
-                <p className="text-xs mb-3" style={{ color: '#475569' }}>{loadError}</p>
+                <p className="text-xs mb-3" style={{ color: '#64748b' }}>{loadError}</p>
                 <button onClick={load} className="text-sm font-medium" style={{ color: '#00c896' }}>Tentar novamente</button>
               </td></tr>
             ) : filtered.length === 0 ? (
               <tr><td colSpan={7} className="py-16 text-center">
-                <Package size={32} className="mx-auto mb-3" style={{ color: '#1e3a5f' }} />
-                <p className="text-sm" style={{ color: '#475569' }}>
+                <Package size={32} className="mx-auto mb-3" style={{ color: '#cbd5e1' }} />
+                <p className="text-sm" style={{ color: '#64748b' }}>
                   {search || categoryFilter || statusFilter ? 'Nenhum item encontrado.' : 'Nenhum item cadastrado ainda.'}
                 </p>
                 {!search && !categoryFilter && !statusFilter && (
@@ -163,18 +163,18 @@ export default function StockPage() {
                 <tr key={item.id}
                   onClick={() => navigate(`/estoque/${item.id}`)}
                   style={{
-                    background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                    borderBottom: '1px solid #f1f5f9',
                     cursor: 'pointer',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,200,150,0.05)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)')}>
+                  onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? '#ffffff' : '#f8fafc')}>
                   <td className="px-4 py-3.5">
                     <span className="text-xs font-mono font-medium" style={{ color: '#00c896' }}>{item.code}</span>
                   </td>
                   <td className="px-4 py-3.5">
-                    <p className="text-sm font-medium text-white">{item.name}</p>
-                    {item.supplier && <p className="text-xs mt-0.5" style={{ color: '#475569' }}>{item.supplier}</p>}
+                    <p className="text-sm font-medium" style={{ color: '#0f172a' }}>{item.name}</p>
+                    {item.supplier && <p className="text-xs mt-0.5" style={{ color: '#64748b' }}>{item.supplier}</p>}
                   </td>
                   <td className="px-4 py-3.5">
                     <span className="text-xs" style={{ color: '#64748b' }}>
@@ -182,8 +182,8 @@ export default function StockPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="text-sm font-semibold" style={{ color: '#e2e8f0' }}>
-                      {item.current_quantity} <span className="text-xs font-normal" style={{ color: '#475569' }}>{unit}</span>
+                    <span className="text-sm font-semibold" style={{ color: '#0f172a' }}>
+                      {item.current_quantity} <span className="text-xs font-normal" style={{ color: '#64748b' }}>{unit}</span>
                     </span>
                   </td>
                   <td className="px-4 py-3.5">
@@ -192,7 +192,7 @@ export default function StockPage() {
                     </span>
                   </td>
                   <td className="px-4 py-3.5">
-                    <span className="text-sm" style={{ color: item.cost_price ? '#e2e8f0' : '#475569' }}>
+                    <span className="text-sm" style={{ color: item.cost_price ? '#0f172a' : '#64748b' }}>
                       {formatCurrency(item.cost_price)}
                     </span>
                   </td>
@@ -226,13 +226,13 @@ function SummaryCard({
 }) {
   return (
     <div onClick={onClick}
-      className="rounded-xl p-4 transition-all"
+      className="rounded-xl p-4 transition-all shadow-sm"
       style={{
-        background: active ? 'rgba(0,200,150,0.08)' : '#0f2040',
-        border: active ? '1px solid rgba(0,200,150,0.3)' : '1px solid rgba(255,255,255,0.07)',
+        background: active ? 'rgba(0,200,150,0.08)' : '#ffffff',
+        border: active ? '1px solid rgba(0,200,150,0.3)' : '1px solid #e2e8f0',
         cursor: onClick ? 'pointer' : 'default',
       }}>
-      <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#475569' }}>{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#64748b' }}>{label}</p>
       <div className="flex items-center gap-1.5">
         {icon && <span style={{ color: iconColor }}>{icon}</span>}
         <p className="text-xl font-bold" style={{ color: valueColor }}>{value}</p>

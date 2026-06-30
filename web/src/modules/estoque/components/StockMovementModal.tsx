@@ -14,17 +14,17 @@ const EMPTY: CreateMovementInput = { type: 'entrada', quantity: '', reason: '', 
 
 const inp = {
   width: '100%',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: '#f8fafc',
+  border: '1px solid #e2e8f0',
   borderRadius: 8,
-  color: '#e2e8f0',
+  color: '#0f172a',
   padding: '9px 12px',
   fontSize: 13,
   outline: 'none',
   fontFamily: 'inherit',
 } as const
 
-const lbl = { color: '#94a3b8', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
+const lbl = { color: '#64748b', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
 
 export default function StockMovementModal({ item, onClose, onSaved }: Props) {
   const [form, setForm] = useState<CreateMovementInput>(EMPTY)
@@ -59,17 +59,17 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-md rounded-2xl flex flex-col"
-        style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)' }}>
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-md rounded-2xl flex flex-col shadow-sm"
+        style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
 
         <div className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          style={{ borderBottom: '1px solid #e2e8f0' }}>
           <div>
-            <h2 className="text-white font-semibold text-lg">Registrar Movimentação</h2>
+            <h2 className="font-semibold text-lg" style={{ color: '#0f172a' }}>Registrar Movimentação</h2>
             <p className="text-xs mt-0.5 font-mono" style={{ color: '#00c896' }}>{item.code} — {item.name}</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}>
             <X size={20} />
           </button>
         </div>
@@ -79,11 +79,11 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
 
             {/* Saldo atual */}
             <div className="rounded-xl px-4 py-3 flex items-center justify-between"
-              style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#475569' }}>
+              style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#64748b' }}>
                 Saldo Atual
               </span>
-              <span className="text-lg font-bold" style={{ color: '#e2e8f0' }}>
+              <span className="text-lg font-bold" style={{ color: '#0f172a' }}>
                 {item.current_quantity} <span className="text-sm font-normal" style={{ color: '#64748b' }}>{unitShort}</span>
               </span>
             </div>
@@ -99,7 +99,7 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
                       ? t === 'entrada'
                         ? { background: 'rgba(0,200,150,0.2)', color: '#00c896', border: '1.5px solid #00c896' }
                         : { background: 'rgba(239,68,68,0.15)', color: '#f87171', border: '1.5px solid #f87171' }
-                      : { background: 'rgba(255,255,255,0.04)', color: '#475569', border: '1px solid rgba(255,255,255,0.08)' }
+                      : { background: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0' }
                     }>
                     {t === 'entrada' ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
                     {t === 'entrada' ? 'Entrada' : 'Saída'}
@@ -120,9 +120,9 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
               <select style={{ ...inp, cursor: 'pointer' }}
                 value={form.reason}
                 onChange={e => setForm(f => ({ ...f, reason: e.target.value as MovementReason | '' }))}>
-                <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
+                <option value="">— Selecionar —</option>
                 {REASONS_BY_TYPE[form.type].map(r => (
-                  <option key={r} value={r} style={{ background: '#1e293b', color: '#e2e8f0' }}>{REASON_LABELS[r]}</option>
+                  <option key={r} value={r}>{REASON_LABELS[r]}</option>
                 ))}
               </select>
             </div>
@@ -142,10 +142,10 @@ export default function StockMovementModal({ item, onClose, onSaved }: Props) {
             )}
           </div>
 
-          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading}

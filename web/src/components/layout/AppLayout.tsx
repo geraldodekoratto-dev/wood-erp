@@ -6,7 +6,7 @@ export default function AppLayout() {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div className="flex min-h-screen" style={{ background: '#0a1628' }}>
+    <div className="flex min-h-screen" style={{ background: '#f8fafc' }}>
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(c => !c)} />
       <main
         className="flex-1 p-8 min-w-0"

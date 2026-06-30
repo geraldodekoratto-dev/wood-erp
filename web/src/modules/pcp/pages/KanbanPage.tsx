@@ -74,7 +74,7 @@ export default function KanbanPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#0f172a' }}>
             <Kanban size={26} style={{ color: '#00c896' }} />
             Painel Kanban
           </h1>
@@ -84,7 +84,7 @@ export default function KanbanPage() {
         </div>
         <button onClick={load}
           className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm transition-all"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
           <RefreshCw size={15} className={loading ? 'animate-spin' : ''} />
           Atualizar
         </button>
@@ -95,7 +95,7 @@ export default function KanbanPage() {
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <RefreshCw size={24} className="animate-spin mx-auto mb-3" style={{ color: '#00c896' }} />
-            <p className="text-sm" style={{ color: '#475569' }}>Carregando ordens...</p>
+            <p className="text-sm" style={{ color: '#64748b' }}>Carregando ordens...</p>
           </div>
         </div>
       ) : (

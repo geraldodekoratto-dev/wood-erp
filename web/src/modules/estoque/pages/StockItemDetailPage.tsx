@@ -79,8 +79,8 @@ export default function StockItemDetailPage() {
 
   if (error || !item) return (
     <div className="flex flex-col items-center justify-center h-64 gap-4">
-      <Package size={36} style={{ color: '#1e3a5f' }} />
-      <p style={{ color: '#475569' }}>{error || 'Item não encontrado.'}</p>
+      <Package size={36} style={{ color: '#cbd5e1' }} />
+      <p style={{ color: '#64748b' }}>{error || 'Item não encontrado.'}</p>
       <button onClick={() => navigate('/estoque')} style={{ color: '#00c896' }} className="text-sm font-medium">
         ← Voltar para Estoque
       </button>
@@ -98,7 +98,7 @@ export default function StockItemDetailPage() {
       <div className="flex items-center gap-4 mb-8">
         <button onClick={() => navigate('/estoque')}
           className="p-2 rounded-lg"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#64748b' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
           <ArrowLeft size={16} />
         </button>
         <div className="flex-1">
@@ -106,7 +106,7 @@ export default function StockItemDetailPage() {
             <span className="text-xl font-bold font-mono" style={{ color: '#00c896' }}>{item.code}</span>
             <StockStatusBadge item={item} />
           </div>
-          <p className="text-base font-semibold text-white mt-0.5">{item.name}</p>
+          <p className="text-base font-semibold mt-0.5" style={{ color: '#0f172a' }}>{item.name}</p>
         </div>
         <div className="flex items-center gap-2">
           <button onClick={() => setShowMovement(true)}
@@ -116,7 +116,7 @@ export default function StockItemDetailPage() {
           </button>
           <button onClick={() => setShowEdit(true)}
             className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569' }}>
             <Pencil size={14} />
           </button>
           <button onClick={() => setShowDelete(true)}
@@ -128,21 +128,21 @@ export default function StockItemDetailPage() {
       </div>
 
       {/* Saldo em destaque */}
-      <div className="rounded-2xl p-5 mb-4 flex items-center justify-between"
+      <div className="rounded-2xl p-5 mb-4 flex items-center justify-between shadow-sm"
         style={{ background: `rgba(${status === 'ok' ? '0,200,150' : status === 'baixo' ? '251,191,36' : '239,68,68'},0.08)`, border: `1px solid ${statusCfg.text}33` }}>
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#475569' }}>Saldo em Estoque</p>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#64748b' }}>Saldo em Estoque</p>
           <p className="text-3xl font-bold" style={{ color: statusCfg.text }}>
             {item.current_quantity}
             <span className="text-base font-normal ml-2" style={{ color: '#64748b' }}>{unit}</span>
           </p>
-          <p className="text-xs mt-1" style={{ color: '#475569' }}>Mínimo: {item.min_quantity} {unit}</p>
+          <p className="text-xs mt-1" style={{ color: '#64748b' }}>Mínimo: {item.min_quantity} {unit}</p>
         </div>
         {item.cost_price && (
           <div className="text-right">
-            <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#475569' }}>Valor em Estoque</p>
-            <p className="text-xl font-bold" style={{ color: '#e2e8f0' }}>{formatCurrency(totalValue)}</p>
-            <p className="text-xs mt-1" style={{ color: '#475569' }}>{formatCurrency(item.cost_price)} / {unit}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider mb-1" style={{ color: '#64748b' }}>Valor em Estoque</p>
+            <p className="text-xl font-bold" style={{ color: '#0f172a' }}>{formatCurrency(totalValue)}</p>
+            <p className="text-xs mt-1" style={{ color: '#64748b' }}>{formatCurrency(item.cost_price)} / {unit}</p>
           </div>
         )}
       </div>
@@ -156,25 +156,25 @@ export default function StockItemDetailPage() {
       </div>
 
       {item.description && (
-        <div className="rounded-xl p-4 mb-4" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#475569' }}>Especificações</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#94a3b8' }}>{item.description}</p>
+        <div className="rounded-xl p-4 mb-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#64748b' }}>Especificações</p>
+          <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{item.description}</p>
         </div>
       )}
 
       {/* Histórico de movimentações */}
       <div className="mt-6">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-semibold uppercase tracking-wider" style={{ color: '#475569' }}>
+          <h2 className="text-sm font-semibold uppercase tracking-wider" style={{ color: '#64748b' }}>
             Histórico de Movimentações
           </h2>
-          <span className="text-xs" style={{ color: '#334155' }}>{movements.length} registro{movements.length !== 1 ? 's' : ''}</span>
+          <span className="text-xs" style={{ color: '#94a3b8' }}>{movements.length} registro{movements.length !== 1 ? 's' : ''}</span>
         </div>
 
-        <div className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+        <div className="rounded-xl overflow-hidden shadow-sm" style={{ border: '1px solid #e2e8f0' }}>
           {movements.length === 0 ? (
             <div className="py-10 text-center">
-              <p className="text-sm" style={{ color: '#475569' }}>Nenhuma movimentação registrada ainda.</p>
+              <p className="text-sm" style={{ color: '#64748b' }}>Nenhuma movimentação registrada ainda.</p>
               <button onClick={() => setShowMovement(true)} className="mt-2 text-sm font-medium" style={{ color: '#00c896' }}>
                 + Registrar primeira movimentação
               </button>
@@ -182,18 +182,18 @@ export default function StockItemDetailPage() {
           ) : (
             <table className="w-full">
               <thead>
-                <tr style={{ background: '#0f2040', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                <tr style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
                   {['Data', 'Tipo', 'Quantidade', 'Motivo', 'Observações'].map(h => (
                     <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                      style={{ color: '#475569' }}>{h}</th>
+                      style={{ color: '#64748b' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {movements.map((mv, i) => (
                   <tr key={mv.id} style={{
-                    background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
-                    borderBottom: '1px solid rgba(255,255,255,0.04)',
+                    background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                    borderBottom: '1px solid #f1f5f9',
                   }}>
                     <td className="px-4 py-3">
                       <span className="text-xs" style={{ color: '#64748b' }}>{formatDateTime(mv.created_at)}</span>
@@ -212,10 +212,10 @@ export default function StockItemDetailPage() {
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="text-xs" style={{ color: '#94a3b8' }}>{REASON_LABELS[mv.reason]}</span>
+                      <span className="text-xs" style={{ color: '#475569' }}>{REASON_LABELS[mv.reason]}</span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="text-xs" style={{ color: '#475569' }}>{mv.notes || '—'}</span>
+                      <span className="text-xs" style={{ color: '#64748b' }}>{mv.notes || '—'}</span>
                     </td>
                   </tr>
                 ))}
@@ -251,13 +251,13 @@ export default function StockItemDetailPage() {
       {/* Modal Excluir */}
       {showDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.75)' }}>
-          <div className="w-full max-w-sm rounded-2xl p-6"
-            style={{ background: '#0f2040', border: '1px solid rgba(239,68,68,0.3)' }}>
+          style={{ background: 'rgba(0,0,0,0.45)' }}>
+          <div className="w-full max-w-sm rounded-2xl p-6 shadow-sm"
+            style={{ background: '#ffffff', border: '1px solid rgba(239,68,68,0.3)' }}>
             <Trash2 size={32} className="mx-auto mb-4" style={{ color: '#f87171' }} />
-            <h3 className="text-white font-semibold text-center mb-2">Excluir Item?</h3>
+            <h3 className="font-semibold text-center mb-2" style={{ color: '#0f172a' }}>Excluir Item?</h3>
             <p className="text-sm text-center mb-6" style={{ color: '#64748b' }}>
-              O item <span className="font-semibold text-white">{item.name}</span> será removido do estoque.
+              O item <span className="font-semibold" style={{ color: '#0f172a' }}>{item.name}</span> será removido do estoque.
               O histórico de movimentações será preservado.
             </p>
             {deleteError && (
@@ -266,7 +266,7 @@ export default function StockItemDetailPage() {
             <div className="flex gap-3">
               <button onClick={() => { setShowDelete(false); setDeleteError('') }}
                 className="flex-1 py-3 rounded-lg text-sm font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                 Cancelar
               </button>
               <button onClick={handleDelete} disabled={deleteLoading}
@@ -284,9 +284,9 @@ export default function StockItemDetailPage() {
 
 function InfoCard({ label, value, valueColor }: { label: string; value: string; valueColor?: string }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
-      <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#475569' }}>{label}</p>
-      <p className="text-sm font-medium" style={{ color: valueColor ?? '#e2e8f0' }}>{value}</p>
+    <div className="rounded-xl p-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+      <p className="text-xs font-semibold uppercase tracking-wider mb-1.5" style={{ color: '#64748b' }}>{label}</p>
+      <p className="text-sm font-medium" style={{ color: valueColor ?? '#0f172a' }}>{value}</p>
     </div>
   )
 }

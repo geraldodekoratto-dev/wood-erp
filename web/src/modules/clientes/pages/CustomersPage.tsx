@@ -54,9 +54,9 @@ export default function CustomersPage() {
   })
 
   const selectStyle = {
-    background: '#0f2040',
-    border: '1px solid rgba(255,255,255,0.08)',
-    color: '#e2e8f0',
+    background: '#f8fafc',
+    border: '1px solid #e2e8f0',
+    color: '#0f172a',
     cursor: 'pointer',
   }
 
@@ -65,7 +65,7 @@ export default function CustomersPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#0f172a' }}>
             <Users size={26} style={{ color: '#00c896' }} />
             Clientes
           </h1>
@@ -76,7 +76,7 @@ export default function CustomersPage() {
         <div className="flex items-center gap-3">
           <button onClick={load}
             className="p-2.5 rounded-lg transition-all"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#64748b' }}>
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
             <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
           </button>
           <button onClick={() => setShowNew(true)}
@@ -91,12 +91,12 @@ export default function CustomersPage() {
       {/* Filters */}
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
           <input
             value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Buscar por nome, CPF/CNPJ, e-mail, cidade..."
             className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm outline-none"
-            style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0' }}
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a' }}
           />
         </div>
         <select value={typeFilter} onChange={e => setTypeFilter(e.target.value)}
@@ -112,20 +112,20 @@ export default function CustomersPage() {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+      <div className="rounded-xl overflow-hidden shadow-sm" style={{ border: '1px solid #e2e8f0' }}>
         <table className="w-full">
           <thead>
-            <tr style={{ background: '#0f2040', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <tr style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
               {['Código', 'Tipo', 'Nome', 'Documento', 'Contato', 'Cidade / UF', 'Status'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: '#475569' }}>{h}</th>
+                  style={{ color: '#64748b' }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="py-16 text-center" style={{ color: '#475569' }}>
+                <td colSpan={7} className="py-16 text-center" style={{ color: '#64748b' }}>
                   <RefreshCw size={20} className="animate-spin mx-auto mb-2" />
                   Carregando clientes...
                 </td>
@@ -133,8 +133,8 @@ export default function CustomersPage() {
             ) : filtered.length === 0 ? (
               <tr>
                 <td colSpan={7} className="py-16 text-center">
-                  <Users size={32} className="mx-auto mb-3" style={{ color: '#1e3a5f' }} />
-                  <p className="text-sm" style={{ color: '#475569' }}>
+                  <Users size={32} className="mx-auto mb-3" style={{ color: '#cbd5e1' }} />
+                  <p className="text-sm" style={{ color: '#64748b' }}>
                     {search || typeFilter || statusFilter
                       ? 'Nenhum cliente encontrado para os filtros aplicados.'
                       : 'Nenhum cliente cadastrado ainda.'}
@@ -151,12 +151,12 @@ export default function CustomersPage() {
               <tr key={c.id}
                 onClick={() => navigate(`/clientes/${c.id}`)}
                 style={{
-                  background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                  borderBottom: '1px solid #f1f5f9',
                   cursor: 'pointer',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,200,150,0.05)')}
-                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)')}>
+                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? '#ffffff' : '#f8fafc')}>
 
                 <td className="px-4 py-3.5">
                   <span className="text-xs font-mono font-medium" style={{ color: '#00c896' }}>{c.code}</span>
@@ -165,14 +165,14 @@ export default function CustomersPage() {
                   <CustomerTypeBadge type={c.type} />
                 </td>
                 <td className="px-4 py-3.5">
-                  <span className="text-sm font-medium text-white">{c.name}</span>
+                  <span className="text-sm font-medium" style={{ color: '#0f172a' }}>{c.name}</span>
                 </td>
                 <td className="px-4 py-3.5">
                   <span className="text-sm font-mono" style={{ color: '#64748b' }}>{c.document || '—'}</span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <div className="text-sm" style={{ color: '#94a3b8' }}>{c.email || '—'}</div>
-                  <div className="text-xs mt-0.5" style={{ color: '#475569' }}>{c.mobile || c.phone || ''}</div>
+                  <div className="text-sm" style={{ color: '#475569' }}>{c.email || '—'}</div>
+                  <div className="text-xs mt-0.5" style={{ color: '#64748b' }}>{c.mobile || c.phone || ''}</div>
                 </td>
                 <td className="px-4 py-3.5">
                   <span className="text-sm" style={{ color: '#64748b' }}>

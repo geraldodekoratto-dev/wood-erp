@@ -30,17 +30,17 @@ const EMPTY_FORM: CreateCustomerInput = {
 
 const inputStyle = {
   width: '100%',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: '#f8fafc',
+  border: '1px solid #e2e8f0',
   borderRadius: 8,
-  color: '#e2e8f0',
+  color: '#0f172a',
   padding: '9px 12px',
   fontSize: 13,
   outline: 'none',
   fontFamily: 'inherit',
 }
 
-const labelStyle = { color: '#94a3b8', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' }
+const labelStyle = { color: '#64748b', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' }
 
 export default function CustomerFormModal({ mode, customer, onClose, onSaved }: Props) {
   const [form, setForm] = useState<CreateCustomerInput>(
@@ -93,27 +93,27 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-2xl rounded-2xl flex flex-col"
-        style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '90vh' }}>
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-2xl rounded-2xl flex flex-col shadow-sm"
+        style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: '90vh' }}>
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          style={{ borderBottom: '1px solid #e2e8f0' }}>
           <div>
-            <h2 className="text-white font-semibold text-lg">{title}</h2>
+            <h2 className="font-semibold text-lg" style={{ color: '#0f172a' }}>{title}</h2>
             {isEdit && customer && (
               <p className="text-xs mt-0.5 font-mono" style={{ color: '#00c896' }}>{customer.code}</p>
             )}
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}>
             <X size={20} />
           </button>
         </div>
 
         {/* Type Toggle */}
         <div className="px-6 pt-5 pb-4">
-          <div className="flex gap-2 p-1 rounded-xl" style={{ background: 'rgba(255,255,255,0.04)', width: 'fit-content' }}>
+          <div className="flex gap-2 p-1 rounded-xl" style={{ background: '#f8fafc', width: 'fit-content' }}>
             {(['pf', 'pj'] as CustomerType[]).map(t => (
               <button
                 key={t}
@@ -121,8 +121,8 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
                 onClick={() => set('type', t)}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
                 style={form.type === t
-                  ? { background: '#0a1628', color: '#00c896', border: '1px solid rgba(0,200,150,0.3)' }
-                  : { color: '#475569' }}>
+                  ? { background: '#ffffff', color: '#00c896', border: '1px solid rgba(0,200,150,0.3)' }
+                  : { color: '#64748b' }}>
                 {t === 'pf' ? <User size={14} /> : <Building2 size={14} />}
                 {t === 'pf' ? 'Pessoa Física' : 'Pessoa Jurídica'}
               </button>
@@ -131,7 +131,7 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 px-6" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <div className="flex gap-1 px-6" style={{ borderBottom: '1px solid #e2e8f0' }}>
           {(['dados', 'endereco'] as const).map(t => (
             <button
               key={t}
@@ -139,7 +139,7 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
               onClick={() => setTab(t)}
               className="px-4 py-2.5 text-sm font-medium transition-colors"
               style={{
-                color: tab === t ? '#00c896' : '#475569',
+                color: tab === t ? '#00c896' : '#64748b',
                 borderBottom: tab === t ? '2px solid #00c896' : '2px solid transparent',
                 marginBottom: -1,
               }}>
@@ -257,8 +257,8 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
                     <label style={labelStyle}>UF</label>
                     <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.state}
                       onChange={e => set('state', e.target.value)}>
-                      <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>—</option>
-                      {BRAZIL_STATES.map(s => <option key={s} value={s} style={{ background: '#1e293b', color: '#e2e8f0' }}>{s}</option>)}
+                      <option value="">—</option>
+                      {BRAZIL_STATES.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
                 </div>
@@ -268,10 +268,10 @@ export default function CustomerFormModal({ mode, customer, onClose, onSaved }: 
 
           {/* Footer */}
           <div className="flex gap-3 px-6 py-4"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+            style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 rounded-lg text-sm font-medium transition-all"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading}

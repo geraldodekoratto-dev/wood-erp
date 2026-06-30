@@ -25,11 +25,11 @@ function newDraft(): PurchaseOrderItemDraft {
 }
 
 const inp = {
-  width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-  borderRadius: 8, color: '#e2e8f0', padding: '9px 12px', fontSize: 13, outline: 'none', fontFamily: 'inherit',
+  width: '100%', background: '#f8fafc', border: '1px solid #e2e8f0',
+  borderRadius: 8, color: '#0f172a', padding: '9px 12px', fontSize: 13, outline: 'none', fontFamily: 'inherit',
 } as const
 
-const lbl = { color: '#94a3b8', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
+const lbl = { color: '#64748b', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
 
 export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }: Props) {
   const [form, setForm] = useState<CreatePurchaseOrderInput>(
@@ -84,12 +84,12 @@ export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-2xl rounded-2xl flex flex-col" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '92vh' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-2xl rounded-2xl flex flex-col shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: '92vh' }}>
 
-        <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <h2 className="text-white font-semibold text-lg">{mode === 'edit' ? 'Editar Pedido de Compra' : 'Novo Pedido de Compra'}</h2>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors"><X size={20} /></button>
+        <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: '1px solid #e2e8f0' }}>
+          <h2 className="font-semibold text-lg" style={{ color: '#0f172a' }}>{mode === 'edit' ? 'Editar Pedido de Compra' : 'Novo Pedido de Compra'}</h2>
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}><X size={20} /></button>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
@@ -133,10 +133,10 @@ export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }
 
                 <div className="space-y-2">
                   {items.map(item => (
-                    <div key={item._key} className="rounded-lg p-3 relative" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                    <div key={item._key} className="rounded-lg p-3 relative" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
                       {/* Stock item search */}
                       <div className="relative mb-2">
-                        <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+                        <Search size={13} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
                         <input
                           style={{ ...inp, paddingLeft: 32, fontSize: 12 }}
                           value={item.stock_item_name}
@@ -148,17 +148,17 @@ export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }
                           onFocus={() => setActiveSearch(item._key)}
                         />
                         {activeSearch === item._key && item.stock_item_name && (
-                          <div className="absolute z-10 w-full mt-1 rounded-lg overflow-hidden" style={{ background: '#0a1628', border: '1px solid rgba(255,255,255,0.1)', maxHeight: 160, overflowY: 'auto' }}>
+                          <div className="absolute z-10 w-full mt-1 rounded-lg overflow-hidden shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: 160, overflowY: 'auto' }}>
                             {stockItems.filter(s => s.name.toLowerCase().includes(item.stock_item_name.toLowerCase())).slice(0, 6).map(s => (
                               <button key={s.id} type="button"
-                                className="w-full flex items-center justify-between px-3 py-2 text-left hover:bg-white/5 transition-colors"
+                                className="w-full flex items-center justify-between px-3 py-2 text-left hover:bg-slate-50 transition-colors"
                                 onClick={() => selectStockItem(item._key, s)}>
-                                <span className="text-sm text-white">{s.name}</span>
-                                <span className="text-xs ml-2" style={{ color: '#475569' }}>{UNIT_SHORT[s.unit]} · {s.current_quantity} disponível</span>
+                                <span className="text-sm" style={{ color: '#0f172a' }}>{s.name}</span>
+                                <span className="text-xs ml-2" style={{ color: '#64748b' }}>{UNIT_SHORT[s.unit]} · {s.current_quantity} disponível</span>
                               </button>
                             ))}
                             {stockItems.filter(s => s.name.toLowerCase().includes(item.stock_item_name.toLowerCase())).length === 0 && (
-                              <p className="px-3 py-2 text-xs" style={{ color: '#475569' }}>Item livre (não vinculado ao estoque)</p>
+                              <p className="px-3 py-2 text-xs" style={{ color: '#64748b' }}>Item livre (não vinculado ao estoque)</p>
                             )}
                           </div>
                         )}
@@ -181,7 +181,7 @@ export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }
 
                       {items.length > 1 && (
                         <button type="button" onClick={() => removeItem(item._key)}
-                          className="absolute top-2.5 right-2.5 p-1 rounded" style={{ color: '#475569' }}>
+                          className="absolute top-2.5 right-2.5 p-1 rounded" style={{ color: '#64748b' }}>
                           <Trash2 size={13} />
                         </button>
                       )}
@@ -192,9 +192,9 @@ export default function PurchaseOrderFormModal({ mode, order, onClose, onSaved }
             )}
           </div>
 
-          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading} className="flex-[2] py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2"

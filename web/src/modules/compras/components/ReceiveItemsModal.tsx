@@ -11,8 +11,8 @@ interface Props {
 }
 
 const inp = {
-  width: '100%', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-  borderRadius: 8, color: '#e2e8f0', padding: '7px 10px', fontSize: 13, outline: 'none', fontFamily: 'inherit',
+  width: '100%', background: '#f8fafc', border: '1px solid #e2e8f0',
+  borderRadius: 8, color: '#0f172a', padding: '7px 10px', fontSize: 13, outline: 'none', fontFamily: 'inherit',
   textAlign: 'center' as const,
 } as const
 
@@ -61,17 +61,17 @@ export default function ReceiveItemsModal({ order, items, onClose, onReceived }:
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-lg rounded-2xl flex flex-col" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '90vh' }}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-lg rounded-2xl flex flex-col shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: '90vh' }}>
 
-        <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+        <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: '1px solid #e2e8f0' }}>
           <div>
-            <h2 className="text-white font-semibold text-lg flex items-center gap-2">
+            <h2 className="font-semibold text-lg flex items-center gap-2" style={{ color: '#0f172a' }}>
               <PackageCheck size={18} style={{ color: '#00c896' }} /> Registrar Recebimento
             </h2>
-            <p className="text-xs mt-0.5" style={{ color: '#475569' }}>{order.code} · {order.supplier_name}</p>
+            <p className="text-xs mt-0.5" style={{ color: '#64748b' }}>{order.code} · {order.supplier_name}</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors"><X size={20} /></button>
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}><X size={20} /></button>
         </div>
 
         <form onSubmit={handleSubmit} className="flex flex-col flex-1 overflow-hidden">
@@ -81,17 +81,17 @@ export default function ReceiveItemsModal({ order, items, onClose, onReceived }:
             )}
 
             {pendingItems.length === 0 && (
-              <p className="text-center py-6 text-sm" style={{ color: '#475569' }}>Todos os itens já foram recebidos.</p>
+              <p className="text-center py-6 text-sm" style={{ color: '#64748b' }}>Todos os itens já foram recebidos.</p>
             )}
 
             {pendingItems.map(item => {
               const pending = item.quantity_ordered - item.quantity_received
               return (
-                <div key={item.id} className="rounded-lg p-4" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <div key={item.id} className="rounded-lg p-4" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <p className="text-sm font-medium text-white">{item.stock_item_name}</p>
-                      <p className="text-xs mt-0.5" style={{ color: '#475569' }}>
+                      <p className="text-sm font-medium" style={{ color: '#0f172a' }}>{item.stock_item_name}</p>
+                      <p className="text-xs mt-0.5" style={{ color: '#64748b' }}>
                         Pedido: {item.quantity_ordered} {item.unit} · Recebido: {item.quantity_received} · Pendente: {pending}
                       </p>
                     </div>
@@ -104,16 +104,16 @@ export default function ReceiveItemsModal({ order, items, onClose, onReceived }:
                       onChange={e => setQty(item.id, e.target.value)}
                       placeholder="0"
                     />
-                    <span className="text-xs" style={{ color: '#475569' }}>{item.unit}</span>
+                    <span className="text-xs" style={{ color: '#64748b' }}>{item.unit}</span>
                   </div>
                 </div>
               )
             })}
           </div>
 
-          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose} className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading || pendingItems.length === 0}

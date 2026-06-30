@@ -33,8 +33,8 @@ function newDraft(): PurchaseOrderItemDraft {
 }
 
 const inp = {
-  background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
-  borderRadius: 8, color: '#e2e8f0', padding: '7px 10px', fontSize: 12, outline: 'none', fontFamily: 'inherit',
+  background: '#f8fafc', border: '1px solid #e2e8f0',
+  borderRadius: 8, color: '#0f172a', padding: '7px 10px', fontSize: 12, outline: 'none', fontFamily: 'inherit',
 } as const
 
 export default function PurchaseOrderDetailPage() {
@@ -139,7 +139,7 @@ export default function PurchaseOrderDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#0a1628' }}>
+      <div className="flex items-center justify-center" style={{ minHeight: '100%', background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}>
         <Loader2 size={28} className="animate-spin" style={{ color: '#00c896' }} />
       </div>
     )
@@ -147,11 +147,11 @@ export default function PurchaseOrderDetailPage() {
 
   if (loadError || !order) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4" style={{ background: '#0a1628' }}>
+      <div className="flex flex-col items-center justify-center gap-4" style={{ minHeight: '100%', background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)' }}>
         <AlertTriangle size={32} style={{ color: '#f87171' }} />
         <p className="text-sm" style={{ color: '#f87171' }}>{loadError || 'Pedido não encontrado.'}</p>
         <button onClick={load} className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm"
-          style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+          style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
           <RefreshCw size={14} /> Tentar novamente
         </button>
       </div>
@@ -162,19 +162,19 @@ export default function PurchaseOrderDetailPage() {
   const canReceive = order.status === 'enviado' || order.status === 'parcialmente_recebido'
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #0a1628 0%, #0d1f3c 100%)' }}>
+    <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', minHeight: '100%' }}>
       <div className="max-w-5xl mx-auto px-6 py-8">
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <button onClick={() => navigate('/compras')}
-            className="p-2 rounded-lg transition-colors" style={{ color: '#475569' }}
-            onMouseOver={e => (e.currentTarget.style.color = '#e2e8f0')}
-            onMouseOut={e => (e.currentTarget.style.color = '#475569')}>
+            className="p-2 rounded-lg transition-colors" style={{ color: '#64748b' }}
+            onMouseOver={e => (e.currentTarget.style.color = '#0f172a')}
+            onMouseOut={e => (e.currentTarget.style.color = '#64748b')}>
             <ArrowLeft size={18} />
           </button>
           <div className="flex items-center gap-3 flex-1">
-            <h1 className="text-xl font-bold text-white font-mono">{order.code}</h1>
+            <h1 className="text-xl font-bold font-mono" style={{ color: '#0f172a' }}>{order.code}</h1>
             <PurchaseOrderStatusBadge status={order.status} />
           </div>
           {!isFinal && (
@@ -182,7 +182,7 @@ export default function PurchaseOrderDetailPage() {
               {order.status === 'rascunho' && (
                 <button onClick={() => setShowEdit(true)}
                   className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold"
-                  style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                  style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                   <Pencil size={13} /> Editar
                 </button>
               )}
@@ -222,23 +222,23 @@ export default function PurchaseOrderDetailPage() {
             { label: 'Previsão de Entrega', value: order.expected_date ? fmt(order.expected_date) : '—' },
             { label: 'Total Estimado', value: items.length > 0 ? fmtMoney(total) : '—' },
           ].map(c => (
-            <div key={c.label} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <p className="text-xs font-semibold mb-1" style={{ color: '#475569' }}>{c.label}</p>
-              <p className="text-sm font-medium text-white">{c.value}</p>
+            <div key={c.label} className="rounded-xl p-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+              <p className="text-xs font-semibold mb-1" style={{ color: '#64748b' }}>{c.label}</p>
+              <p className="text-sm font-medium" style={{ color: '#0f172a' }}>{c.value}</p>
             </div>
           ))}
         </div>
 
         {order.notes && (
-          <div className="mb-6 px-4 py-3 rounded-xl text-sm" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)', color: '#94a3b8' }}>
-            <span className="font-semibold text-xs" style={{ color: '#475569' }}>Observações: </span>{order.notes}
+          <div className="mb-6 px-4 py-3 rounded-xl text-sm shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0', color: '#475569' }}>
+            <span className="font-semibold text-xs" style={{ color: '#64748b' }}>Observações: </span>{order.notes}
           </div>
         )}
 
         {/* Itens */}
-        <div className="rounded-2xl overflow-hidden" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-            <h2 className="text-sm font-semibold text-white">Itens do Pedido</h2>
+        <div className="rounded-2xl overflow-hidden shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+          <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: '1px solid #e2e8f0' }}>
+            <h2 className="text-sm font-semibold" style={{ color: '#0f172a' }}>Itens do Pedido</h2>
             {!isFinal && order.status === 'rascunho' && (
               <button onClick={() => { setShowAddItem(v => !v); setDraft(newDraft()); setAddError('') }}
                 className="flex items-center gap-1.5 text-xs font-semibold" style={{ color: '#00c896' }}>
@@ -249,10 +249,10 @@ export default function PurchaseOrderDetailPage() {
 
           {/* Add item inline form */}
           {showAddItem && (
-            <form onSubmit={handleAddItem} className="px-5 py-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(0,200,150,0.04)' }}>
+            <form onSubmit={handleAddItem} className="px-5 py-4" style={{ borderBottom: '1px solid #e2e8f0', background: 'rgba(0,200,150,0.04)' }}>
               {addError && <p className="text-xs mb-2" style={{ color: '#f87171' }}>{addError}</p>}
               <div className="relative mb-2">
-                <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+                <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
                 <input
                   style={{ ...inp, width: '100%', paddingLeft: 28 }}
                   value={draft.stock_item_name}
@@ -264,13 +264,13 @@ export default function PurchaseOrderDetailPage() {
                   onFocus={() => setShowSuggestions(true)}
                 />
                 {showSuggestions && draft.stock_item_name && (
-                  <div className="absolute z-10 w-full mt-1 rounded-lg" style={{ background: '#0a1628', border: '1px solid rgba(255,255,255,0.1)', maxHeight: 140, overflowY: 'auto' }}>
+                  <div className="absolute z-10 w-full mt-1 rounded-lg shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: 140, overflowY: 'auto' }}>
                     {stockItems.filter(s => s.name.toLowerCase().includes(draft.stock_item_name.toLowerCase())).slice(0, 5).map(s => (
                       <button key={s.id} type="button"
-                        className="w-full flex items-center justify-between px-3 py-2 hover:bg-white/5 transition-colors"
+                        className="w-full flex items-center justify-between px-3 py-2 hover:bg-slate-50 transition-colors"
                         onClick={() => { setDraft(d => ({ ...d, stock_item_id: s.id, stock_item_name: s.name, unit: s.unit })); setShowSuggestions(false) }}>
-                        <span className="text-sm text-white">{s.name}</span>
-                        <span className="text-xs ml-2" style={{ color: '#475569' }}>{UNIT_SHORT[s.unit]}</span>
+                        <span className="text-sm" style={{ color: '#0f172a' }}>{s.name}</span>
+                        <span className="text-xs ml-2" style={{ color: '#64748b' }}>{UNIT_SHORT[s.unit]}</span>
                       </button>
                     ))}
                   </div>
@@ -278,15 +278,15 @@ export default function PurchaseOrderDetailPage() {
               </div>
               <div className="grid grid-cols-4 gap-2">
                 <div>
-                  <label className="text-xs font-semibold" style={{ color: '#94a3b8' }}>Qtd</label>
+                  <label className="text-xs font-semibold" style={{ color: '#64748b' }}>Qtd</label>
                   <input style={{ ...inp, width: '100%' }} value={draft.quantity} onChange={e => setDraft(d => ({ ...d, quantity: e.target.value }))} placeholder="1" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold" style={{ color: '#94a3b8' }}>Unidade</label>
+                  <label className="text-xs font-semibold" style={{ color: '#64748b' }}>Unidade</label>
                   <input style={{ ...inp, width: '100%' }} value={draft.unit} onChange={e => setDraft(d => ({ ...d, unit: e.target.value }))} placeholder="un" />
                 </div>
                 <div>
-                  <label className="text-xs font-semibold" style={{ color: '#94a3b8' }}>Preço Unit.</label>
+                  <label className="text-xs font-semibold" style={{ color: '#64748b' }}>Preço Unit.</label>
                   <input style={{ ...inp, width: '100%' }} value={draft.unit_price} onChange={e => setDraft(d => ({ ...d, unit_price: e.target.value }))} placeholder="0,00" />
                 </div>
                 <div className="flex items-end gap-2">
@@ -296,7 +296,7 @@ export default function PurchaseOrderDetailPage() {
                     {addLoading ? <Loader2 size={12} className="animate-spin mx-auto" /> : 'Adicionar'}
                   </button>
                   <button type="button" onClick={() => setShowAddItem(false)}
-                    className="py-1.5 px-2 rounded-lg text-xs" style={{ color: '#475569' }}>
+                    className="py-1.5 px-2 rounded-lg text-xs" style={{ color: '#64748b' }}>
                     ✕
                   </button>
                 </div>
@@ -306,15 +306,15 @@ export default function PurchaseOrderDetailPage() {
 
           {items.length === 0 ? (
             <div className="flex flex-col items-center py-12 gap-2">
-              <ShoppingBag size={28} style={{ color: '#1e3a5f' }} />
-              <p className="text-sm" style={{ color: '#475569' }}>Nenhum item adicionado.</p>
+              <ShoppingBag size={28} style={{ color: '#cbd5e1' }} />
+              <p className="text-sm" style={{ color: '#64748b' }}>Nenhum item adicionado.</p>
             </div>
           ) : (
             <table className="w-full">
               <thead>
-                <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
                   {['Item', 'Qtd Pedida', 'Qtd Recebida', 'Unidade', 'Preço Unit.', 'Total', ''].map(h => (
-                    <th key={h} className="text-left px-4 py-3 text-xs font-semibold" style={{ color: '#475569' }}>{h}</th>
+                    <th key={h} className="text-left px-4 py-3 text-xs font-semibold" style={{ color: '#64748b' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -322,25 +322,25 @@ export default function PurchaseOrderDetailPage() {
                 {items.map((item, idx) => {
                   const allReceived = item.quantity_received >= item.quantity_ordered
                   return (
-                    <tr key={item.id} style={{ borderBottom: idx < items.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
+                    <tr key={item.id} style={{ borderBottom: idx < items.length - 1 ? '1px solid #f1f5f9' : 'none' }}>
                       <td className="px-4 py-3.5">
-                        <p className="text-sm font-medium text-white">{item.stock_item_name}</p>
-                        {item.stock_item_id && <p className="text-xs mt-0.5" style={{ color: '#334155' }}>Vinculado ao estoque</p>}
+                        <p className="text-sm font-medium" style={{ color: '#0f172a' }}>{item.stock_item_name}</p>
+                        {item.stock_item_id && <p className="text-xs mt-0.5" style={{ color: '#94a3b8' }}>Vinculado ao estoque</p>}
                       </td>
-                      <td className="px-4 py-3.5 text-sm text-white">{item.quantity_ordered}</td>
+                      <td className="px-4 py-3.5 text-sm" style={{ color: '#0f172a' }}>{item.quantity_ordered}</td>
                       <td className="px-4 py-3.5">
-                        <span className="text-sm font-semibold" style={{ color: allReceived ? '#4ade80' : item.quantity_received > 0 ? '#fbbf24' : '#94a3b8' }}>
+                        <span className="text-sm font-semibold" style={{ color: allReceived ? '#4ade80' : item.quantity_received > 0 ? '#fbbf24' : '#64748b' }}>
                           {item.quantity_received}
                         </span>
                       </td>
-                      <td className="px-4 py-3.5 text-sm" style={{ color: '#94a3b8' }}>{item.unit}</td>
-                      <td className="px-4 py-3.5 text-sm" style={{ color: '#94a3b8' }}>{fmtMoney(item.unit_price)}</td>
-                      <td className="px-4 py-3.5 text-sm text-white">
+                      <td className="px-4 py-3.5 text-sm" style={{ color: '#475569' }}>{item.unit}</td>
+                      <td className="px-4 py-3.5 text-sm" style={{ color: '#475569' }}>{fmtMoney(item.unit_price)}</td>
+                      <td className="px-4 py-3.5 text-sm" style={{ color: '#0f172a' }}>
                         {item.unit_price !== null ? fmtMoney(item.unit_price * item.quantity_ordered) : '—'}
                       </td>
                       <td className="px-4 py-3.5">
                         {!isFinal && order.status === 'rascunho' && (
-                          <button onClick={() => handleRemoveItem(item.id)} className="p-1.5 rounded-lg" style={{ color: '#475569' }}>
+                          <button onClick={() => handleRemoveItem(item.id)} className="p-1.5 rounded-lg" style={{ color: '#64748b' }}>
                             <Trash2 size={13} />
                           </button>
                         )}
@@ -351,9 +351,9 @@ export default function PurchaseOrderDetailPage() {
               </tbody>
               {items.length > 0 && (
                 <tfoot>
-                  <tr style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                    <td colSpan={5} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: '#475569' }}>Total estimado:</td>
-                    <td className="px-4 py-3 text-sm font-bold text-white">{fmtMoney(total)}</td>
+                  <tr style={{ borderTop: '1px solid #e2e8f0' }}>
+                    <td colSpan={5} className="px-4 py-3 text-right text-xs font-semibold" style={{ color: '#64748b' }}>Total estimado:</td>
+                    <td className="px-4 py-3 text-sm font-bold" style={{ color: '#0f172a' }}>{fmtMoney(total)}</td>
                     <td />
                   </tr>
                 </tfoot>
@@ -388,16 +388,16 @@ export default function PurchaseOrderDetailPage() {
 
       {/* Cancel confirm */}
       {showCancel && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.75)' }}>
-          <div className="w-full max-w-md rounded-2xl p-6" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <h3 className="text-white font-semibold text-base mb-2">Cancelar pedido?</h3>
-            <p className="text-sm mb-4" style={{ color: '#94a3b8' }}>
-              O pedido <strong className="text-white">{order.code}</strong> será marcado como cancelado. Itens já recebidos no estoque não serão revertidos.
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.45)' }}>
+          <div className="w-full max-w-md rounded-2xl p-6 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+            <h3 className="font-semibold text-base mb-2" style={{ color: '#0f172a' }}>Cancelar pedido?</h3>
+            <p className="text-sm mb-4" style={{ color: '#475569' }}>
+              O pedido <strong style={{ color: '#0f172a' }}>{order.code}</strong> será marcado como cancelado. Itens já recebidos no estoque não serão revertidos.
             </p>
             {actionError && <p className="text-xs mb-3" style={{ color: '#f87171' }}>{actionError}</p>}
             <div className="flex gap-3">
               <button onClick={() => setShowCancel(false)} className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                 Voltar
               </button>
               <button onClick={handleCancel} disabled={actionLoading} className="flex-1 py-2.5 rounded-lg text-sm font-semibold flex items-center justify-center gap-2"

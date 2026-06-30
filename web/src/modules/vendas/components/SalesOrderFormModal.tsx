@@ -27,17 +27,17 @@ const EMPTY: CreateSalesOrderInput = {
 
 const inp = {
   width: '100%',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: '#f8fafc',
+  border: '1px solid #e2e8f0',
   borderRadius: 8,
-  color: '#e2e8f0',
+  color: '#0f172a',
   padding: '9px 12px',
   fontSize: 13,
   outline: 'none',
   fontFamily: 'inherit',
 }
 
-const lbl = { color: '#94a3b8', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
+const lbl = { color: '#64748b', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
 
 export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: Props) {
   const [form, setForm] = useState<CreateSalesOrderInput>(
@@ -106,22 +106,22 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-2xl rounded-2xl flex flex-col"
-        style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '90vh' }}>
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-2xl rounded-2xl flex flex-col shadow-sm"
+        style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: '90vh' }}>
 
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          style={{ borderBottom: '1px solid #e2e8f0' }}>
           <div>
-            <h2 className="text-white font-semibold text-lg">
+            <h2 className="font-semibold text-lg" style={{ color: '#0f172a' }}>
               {mode === 'edit' ? 'Editar Pedido' : 'Novo Pedido de Venda'}
             </h2>
             {mode === 'edit' && order && (
               <p className="text-xs mt-0.5 font-mono" style={{ color: '#00c896' }}>{order.code}</p>
             )}
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}>
             <X size={20} />
           </button>
         </div>
@@ -140,7 +140,7 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
             <div className="relative">
               <label style={lbl}>Cliente *</label>
               <div className="relative">
-                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+                <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
                 <input
                   style={{ ...inp, paddingLeft: 36 }}
                   value={customerSearch}
@@ -160,15 +160,15 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
                 />
               </div>
               {showCustomerList && customerSearch && filteredCustomers.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 rounded-lg overflow-hidden"
-                  style={{ background: '#0a1628', border: '1px solid rgba(255,255,255,0.1)', maxHeight: 180, overflowY: 'auto' }}>
+                <div className="absolute z-10 w-full mt-1 rounded-lg overflow-hidden shadow-sm"
+                  style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: 180, overflowY: 'auto' }}>
                   {filteredCustomers.slice(0, 8).map(c => (
                     <button key={c.id} type="button"
-                      className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-white/5 transition-colors"
+                      className="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-slate-50 transition-colors"
                       onClick={() => selectCustomer(c)}>
                       <div>
-                        <div className="text-sm text-white font-medium">{c.name}</div>
-                        <div className="text-xs" style={{ color: '#475569' }}>{c.document || c.email || c.type.toUpperCase()}</div>
+                        <div className="text-sm font-medium" style={{ color: '#0f172a' }}>{c.name}</div>
+                        <div className="text-xs" style={{ color: '#64748b' }}>{c.document || c.email || c.type.toUpperCase()}</div>
                       </div>
                     </button>
                   ))}
@@ -212,9 +212,9 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
                 <label style={lbl}>Forma de Pagamento</label>
                 <select style={{ ...inp, cursor: 'pointer' }} value={form.payment_method}
                   onChange={e => set('payment_method', e.target.value as PaymentMethod | '')}>
-                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
+                  <option value="">— Selecionar —</option>
                   {(Object.entries(PAYMENT_METHOD_LABELS) as [PaymentMethod, string][]).map(([k, v]) => (
-                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
+                    <option key={k} value={k}>{v}</option>
                   ))}
                 </select>
               </div>
@@ -236,10 +236,10 @@ export default function SalesOrderFormModal({ mode, order, onClose, onSaved }: P
           </div>
 
           {/* Footer */}
-          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading}

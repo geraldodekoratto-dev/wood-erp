@@ -62,7 +62,7 @@ export default function PCPPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#0f172a' }}>
             <Factory size={26} style={{ color: '#00c896' }} />
             PCP — Produção
           </h1>
@@ -73,7 +73,7 @@ export default function PCPPage() {
         <div className="flex items-center gap-3">
           <button onClick={load}
             className="p-2.5 rounded-lg transition-all"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#64748b' }}>
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
             <RefreshCw size={16} />
           </button>
           <button onClick={() => setShowNewModal(true)}
@@ -88,36 +88,36 @@ export default function PCPPage() {
       {/* Filters */}
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
           <input
             value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Buscar por cliente, projeto ou nº da ordem..."
-            className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm text-white outline-none"
-            style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0' }}
+            className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm outline-none"
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a' }}
           />
         </div>
         <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
           className="px-3 py-2.5 rounded-lg text-sm outline-none"
-          style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0', cursor: 'pointer' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer' }}>
           {STATUS_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </div>
 
       {/* Table */}
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+      <div className="rounded-xl overflow-hidden shadow-sm" style={{ border: '1px solid #e2e8f0' }}>
         <table className="w-full">
           <thead>
-            <tr style={{ background: '#0f2040', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <tr style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
               {['Nº Ordem', 'Cliente', 'Projeto', 'Prioridade', 'Status', 'Entrega', 'Avançar Etapa'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: '#475569' }}>{h}</th>
+                  style={{ color: '#64748b' }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="py-16 text-center" style={{ color: '#475569' }}>
+                <td colSpan={7} className="py-16 text-center" style={{ color: '#64748b' }}>
                   <RefreshCw size={20} className="animate-spin mx-auto mb-2" />
                   Carregando ordens...
                 </td>
@@ -125,8 +125,8 @@ export default function PCPPage() {
             ) : filtered.length === 0 ? (
               <tr>
                 <td colSpan={7} className="py-16 text-center">
-                  <Factory size={32} className="mx-auto mb-3" style={{ color: '#1e3a5f' }} />
-                  <p className="text-sm" style={{ color: '#475569' }}>
+                  <Factory size={32} className="mx-auto mb-3" style={{ color: '#cbd5e1' }} />
+                  <p className="text-sm" style={{ color: '#64748b' }}>
                     {search || statusFilter ? 'Nenhuma ordem encontrada.' : 'Nenhuma ordem cadastrada ainda.'}
                   </p>
                   {!search && !statusFilter && (
@@ -141,22 +141,22 @@ export default function PCPPage() {
               <tr key={order.id}
                 onClick={() => navigate(`/pcp/${order.id}`)}
                 style={{
-                  background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                  borderBottom: '1px solid #f1f5f9',
                   cursor: 'pointer',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,200,150,0.05)')}
-                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)')}>
+                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? '#ffffff' : '#f8fafc')}>
                 <td className="px-4 py-3.5">
                   <span className="text-sm font-mono font-medium" style={{ color: '#00c896' }}>
                     {order.reference_number}
                   </span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <span className="text-sm text-white font-medium">{order.client_name}</span>
+                  <span className="text-sm font-medium" style={{ color: '#0f172a' }}>{order.client_name}</span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <span className="text-sm" style={{ color: '#94a3b8' }}>{order.project_name}</span>
+                  <span className="text-sm" style={{ color: '#475569' }}>{order.project_name}</span>
                 </td>
                 <td className="px-4 py-3.5">
                   <span className="text-xs font-semibold" style={{ color: PRIORITY_COLORS[order.priority] }}>
@@ -179,9 +179,9 @@ export default function PCPPage() {
                       onChange={e => handleStatusChange(order.id, e.target.value as ProductionOrderStatus)}
                       className="text-xs rounded-lg px-2 py-1.5 outline-none"
                       style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        color: '#e2e8f0',
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        color: '#0f172a',
                         cursor: 'pointer',
                       }}>
                       {Object.entries(STATUS_LABELS).map(([value, label]) => (
@@ -189,7 +189,7 @@ export default function PCPPage() {
                       ))}
                     </select>
                   ) : (
-                    <span className="text-xs" style={{ color: '#334155' }}>—</span>
+                    <span className="text-xs" style={{ color: '#cbd5e1' }}>—</span>
                   )}
                 </td>
               </tr>

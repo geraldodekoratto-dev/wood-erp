@@ -102,8 +102,8 @@ export default function SalesDetailPage() {
 
   if (error || !order) return (
     <div className="flex flex-col items-center justify-center h-64 gap-4">
-      <ShoppingCart size={36} style={{ color: '#1e3a5f' }} />
-      <p style={{ color: '#475569' }}>{error || 'Pedido não encontrado.'}</p>
+      <ShoppingCart size={36} style={{ color: '#cbd5e1' }} />
+      <p style={{ color: '#64748b' }}>{error || 'Pedido não encontrado.'}</p>
       <button onClick={() => navigate('/vendas')} style={{ color: '#00c896' }} className="text-sm font-medium">
         ← Voltar para Vendas
       </button>
@@ -123,7 +123,7 @@ export default function SalesDetailPage() {
       <div className="flex items-center gap-4 mb-8">
         <button onClick={() => navigate('/vendas')}
           className="p-2 rounded-lg"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#64748b' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
           <ArrowLeft size={16} />
         </button>
         <div className="flex-1">
@@ -143,7 +143,7 @@ export default function SalesDetailPage() {
           {!isFinal && (
             <button onClick={() => setShowEdit(true)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
+              style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569' }}>
               <Pencil size={14} /> Editar
             </button>
           )}
@@ -182,16 +182,16 @@ export default function SalesDetailPage() {
       )}
 
       {order.description && (
-        <div className="rounded-xl p-5 mb-4" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#475569' }}>Descrição dos Móveis</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#94a3b8' }}>{order.description}</p>
+        <div className="rounded-xl p-5 mb-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#64748b' }}>Descrição dos Móveis</p>
+          <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{order.description}</p>
         </div>
       )}
 
       {order.notes && (
-        <div className="rounded-xl p-5 mb-4" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
-          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#475569' }}>Observações</p>
-          <p className="text-sm leading-relaxed" style={{ color: '#94a3b8' }}>{order.notes}</p>
+        <div className="rounded-xl p-5 mb-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+          <p className="text-xs font-semibold uppercase tracking-wider mb-2" style={{ color: '#64748b' }}>Observações</p>
+          <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{order.notes}</p>
         </div>
       )}
 
@@ -237,11 +237,11 @@ export default function SalesDetailPage() {
       {/* Modal: Confirmar e Gerar OP */}
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.75)' }}>
-          <div className="w-full max-w-md rounded-2xl p-6"
-            style={{ background: '#0f2040', border: '1px solid rgba(0,200,150,0.3)' }}>
+          style={{ background: 'rgba(0,0,0,0.45)' }}>
+          <div className="w-full max-w-md rounded-2xl p-6 shadow-sm"
+            style={{ background: '#ffffff', border: '1px solid rgba(0,200,150,0.3)' }}>
             <Factory size={32} className="mx-auto mb-4" style={{ color: '#00c896' }} />
-            <h3 className="text-white font-semibold text-center text-lg mb-1">Confirmar Pedido</h3>
+            <h3 className="font-semibold text-center text-lg mb-1" style={{ color: '#0f172a' }}>Confirmar Pedido</h3>
             <p className="text-sm text-center mb-5" style={{ color: '#64748b' }}>
               Uma <strong style={{ color: '#00c896' }}>Ordem de Produção</strong> será criada automaticamente no PCP
               para o pedido <span className="font-mono" style={{ color: '#00c896' }}>{order.code}</span>.
@@ -255,7 +255,7 @@ export default function SalesDetailPage() {
             )}
 
             <div className="mb-5">
-              <label className="block text-xs font-semibold mb-2" style={{ color: '#94a3b8' }}>Prioridade da OP</label>
+              <label className="block text-xs font-semibold mb-2" style={{ color: '#64748b' }}>Prioridade da OP</label>
               <div className="flex gap-2">
                 {(['baixa', 'normal', 'alta', 'urgente'] as ConfirmPriority[]).map(p => (
                   <button key={p} type="button"
@@ -263,7 +263,7 @@ export default function SalesDetailPage() {
                     className="flex-1 py-2 rounded-lg text-xs font-semibold capitalize transition-all"
                     style={confirmPriority === p
                       ? { background: '#00c896', color: '#0a1628' }
-                      : { background: 'rgba(255,255,255,0.05)', color: '#475569', border: '1px solid rgba(255,255,255,0.08)' }}>
+                      : { background: '#f8fafc', color: '#64748b', border: '1px solid #e2e8f0' }}>
                     {p.charAt(0).toUpperCase() + p.slice(1)}
                   </button>
                 ))}
@@ -273,7 +273,7 @@ export default function SalesDetailPage() {
             <div className="flex gap-3">
               <button onClick={() => { setShowConfirm(false); setActionError('') }}
                 className="flex-1 py-3 rounded-lg text-sm font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                 Cancelar
               </button>
               <button onClick={handleConfirm} disabled={actionLoading}
@@ -290,11 +290,11 @@ export default function SalesDetailPage() {
       {/* Modal: Cancelar */}
       {showCancel && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.7)' }}>
-          <div className="w-full max-w-sm rounded-2xl p-6"
-            style={{ background: '#0f2040', border: '1px solid rgba(239,68,68,0.3)' }}>
+          style={{ background: 'rgba(0,0,0,0.45)' }}>
+          <div className="w-full max-w-sm rounded-2xl p-6 shadow-sm"
+            style={{ background: '#ffffff', border: '1px solid rgba(239,68,68,0.3)' }}>
             <XCircle size={32} className="mx-auto mb-4" style={{ color: '#f87171' }} />
-            <h3 className="text-white font-semibold text-center mb-2">Cancelar Pedido?</h3>
+            <h3 className="font-semibold text-center mb-2" style={{ color: '#0f172a' }}>Cancelar Pedido?</h3>
             <p className="text-sm text-center mb-4" style={{ color: '#64748b' }}>
               O pedido <span className="font-mono font-semibold" style={{ color: '#00c896' }}>{order.code}</span> será marcado como cancelado.
             </p>
@@ -313,7 +313,7 @@ export default function SalesDetailPage() {
             <div className="flex gap-3">
               <button onClick={() => { setShowCancel(false); setActionError('') }}
                 className="flex-1 py-3 rounded-lg text-sm font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                 Voltar
               </button>
               <button onClick={handleCancel} disabled={actionLoading}
@@ -340,12 +340,12 @@ export default function SalesDetailPage() {
 
 function InfoCard({ icon, label, value, valueColor }: { icon: React.ReactNode; label: string; value: string; valueColor?: string }) {
   return (
-    <div className="rounded-xl p-4" style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
+    <div className="rounded-xl p-4 shadow-sm" style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
       <div className="flex items-center gap-1.5 mb-2">
-        <span style={{ color: '#475569' }}>{icon}</span>
-        <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#475569' }}>{label}</span>
+        <span style={{ color: '#64748b' }}>{icon}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#64748b' }}>{label}</span>
       </div>
-      <p className="text-sm font-medium" style={{ color: valueColor ?? '#e2e8f0' }}>{value}</p>
+      <p className="text-sm font-medium" style={{ color: valueColor ?? '#0f172a' }}>{value}</p>
     </div>
   )
 }

@@ -104,8 +104,8 @@ export default function OrderDetailPage() {
   if (error || !order) {
     return (
       <div className="flex flex-col items-center justify-center h-64 gap-4">
-        <Factory size={36} style={{ color: '#1e3a5f' }} />
-        <p style={{ color: '#475569' }}>{error || 'Ordem não encontrada.'}</p>
+        <Factory size={36} style={{ color: '#cbd5e1' }} />
+        <p style={{ color: '#64748b' }}>{error || 'Ordem não encontrada.'}</p>
         <button onClick={() => navigate('/pcp')} style={{ color: '#00c896' }} className="text-sm font-medium">
           ← Voltar ao PCP
         </button>
@@ -124,7 +124,7 @@ export default function OrderDetailPage() {
         <button
           onClick={() => navigate('/pcp')}
           className="p-2 rounded-lg transition-all"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', color: '#64748b' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
           <ArrowLeft size={16} />
         </button>
         <div className="flex-1">
@@ -149,7 +149,7 @@ export default function OrderDetailPage() {
             <button
               onClick={() => setShowEdit(true)}
               className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8' }}>
+              style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#475569' }}>
               <Pencil size={14} />
               Editar
             </button>
@@ -192,22 +192,22 @@ export default function OrderDetailPage() {
 
       {/* Notes */}
       {order.notes && (
-        <div className="rounded-xl p-5 mb-6"
-          style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
+        <div className="rounded-xl p-5 mb-6 shadow-sm"
+          style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
           <div className="flex items-center gap-2 mb-3">
-            <FileText size={14} style={{ color: '#475569' }} />
-            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#475569' }}>
+            <FileText size={14} style={{ color: '#64748b' }} />
+            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#64748b' }}>
               Observações
             </span>
           </div>
-          <p className="text-sm leading-relaxed" style={{ color: '#94a3b8' }}>{order.notes}</p>
+          <p className="text-sm leading-relaxed" style={{ color: '#475569' }}>{order.notes}</p>
         </div>
       )}
 
       {/* Status Pipeline */}
-      <div className="rounded-xl p-5 mb-6"
-        style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
-        <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#475569' }}>
+      <div className="rounded-xl p-5 mb-6 shadow-sm"
+        style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
+        <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#64748b' }}>
           Fluxo de Produção
         </p>
         <div className="flex flex-wrap gap-2">
@@ -229,8 +229,8 @@ export default function OrderDetailPage() {
                 <span key={s}
                   className="text-xs px-2.5 py-1 rounded-full font-medium"
                   style={{
-                    background: isCurrent ? bg : isPast ? 'rgba(0,200,150,0.06)' : 'rgba(255,255,255,0.04)',
-                    color: isCurrent ? text : isPast ? '#334155' : '#334155',
+                    background: isCurrent ? bg : isPast ? 'rgba(0,200,150,0.06)' : '#f1f5f9',
+                    color: isCurrent ? text : isPast ? '#94a3b8' : '#94a3b8',
                     border: isCurrent ? `1px solid ${text}40` : '1px solid transparent',
                     textDecoration: isPast ? 'line-through' : 'none',
                   }}>
@@ -276,11 +276,11 @@ export default function OrderDetailPage() {
       {/* Cancel Confirm */}
       {showCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-          style={{ background: 'rgba(0,0,0,0.7)' }}>
-          <div className="w-full max-w-sm rounded-2xl p-6"
-            style={{ background: '#0f2040', border: '1px solid rgba(239,68,68,0.3)' }}>
+          style={{ background: 'rgba(0,0,0,0.45)' }}>
+          <div className="w-full max-w-sm rounded-2xl p-6 shadow-sm"
+            style={{ background: '#ffffff', border: '1px solid rgba(239,68,68,0.3)' }}>
             <XCircle size={32} className="mx-auto mb-4" style={{ color: '#f87171' }} />
-            <h3 className="text-white font-semibold text-center mb-2">Cancelar Ordem?</h3>
+            <h3 className="font-semibold text-center mb-2" style={{ color: '#0f172a' }}>Cancelar Ordem?</h3>
             <p className="text-sm text-center mb-6" style={{ color: '#64748b' }}>
               A ordem <span className="font-mono font-semibold" style={{ color: '#00c896' }}>
                 {order.reference_number}
@@ -289,7 +289,7 @@ export default function OrderDetailPage() {
             <div className="flex gap-3">
               <button onClick={() => setShowCancelConfirm(false)}
                 className="flex-1 py-3 rounded-lg text-sm font-medium"
-                style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+                style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
                 Voltar
               </button>
               <button onClick={handleCancel} disabled={actionLoading}
@@ -314,15 +314,15 @@ function InfoCard({
   valueColor?: string
 }) {
   return (
-    <div className="rounded-xl p-4"
-      style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.07)' }}>
+    <div className="rounded-xl p-4 shadow-sm"
+      style={{ background: '#ffffff', border: '1px solid #e2e8f0' }}>
       <div className="flex items-center gap-1.5 mb-2">
-        <span style={{ color: '#475569' }}>{icon}</span>
-        <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#475569' }}>
+        <span style={{ color: '#64748b' }}>{icon}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#64748b' }}>
           {label}
         </span>
       </div>
-      <p className="text-sm font-medium" style={{ color: valueColor ?? '#e2e8f0' }}>
+      <p className="text-sm font-medium" style={{ color: valueColor ?? '#0f172a' }}>
         {value}
       </p>
     </div>

@@ -18,17 +18,17 @@ const EMPTY: CreateStockItemInput = {
 
 const inp = {
   width: '100%',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.1)',
+  background: '#f8fafc',
+  border: '1px solid #e2e8f0',
   borderRadius: 8,
-  color: '#e2e8f0',
+  color: '#0f172a',
   padding: '9px 12px',
   fontSize: 13,
   outline: 'none',
   fontFamily: 'inherit',
 } as const
 
-const lbl = { color: '#94a3b8', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
+const lbl = { color: '#64748b', fontSize: 12, fontWeight: 600, marginBottom: 6, display: 'block' } as const
 
 export default function StockItemFormModal({ mode, item, onClose, onSaved }: Props) {
   const [form, setForm] = useState<CreateStockItemInput>(
@@ -81,16 +81,16 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)' }}>
-      <div className="w-full max-w-lg rounded-2xl flex flex-col"
-        style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.1)', maxHeight: '90vh' }}>
+      style={{ background: 'rgba(0,0,0,0.45)' }}>
+      <div className="w-full max-w-lg rounded-2xl flex flex-col shadow-sm"
+        style={{ background: '#ffffff', border: '1px solid #e2e8f0', maxHeight: '90vh' }}>
 
         <div className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-          <h2 className="text-white font-semibold text-lg">
+          style={{ borderBottom: '1px solid #e2e8f0' }}>
+          <h2 className="font-semibold text-lg" style={{ color: '#0f172a' }}>
             {mode === 'edit' ? 'Editar Item' : 'Novo Item de Estoque'}
           </h2>
-          <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors">
+          <button onClick={onClose} className="transition-colors" style={{ color: '#94a3b8' }}>
             <X size={20} />
           </button>
         </div>
@@ -117,9 +117,9 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
                 <select style={{ ...inp, cursor: 'pointer' }}
                   value={form.category}
                   onChange={e => set('category', e.target.value as StockCategory | '')}>
-                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
+                  <option value="">— Selecionar —</option>
                   {(Object.entries(CATEGORY_LABELS) as [StockCategory, string][]).map(([k, v]) => (
-                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
+                    <option key={k} value={k}>{v}</option>
                   ))}
                 </select>
               </div>
@@ -128,9 +128,9 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
                 <select style={{ ...inp, cursor: 'pointer' }}
                   value={form.unit}
                   onChange={e => set('unit', e.target.value as StockUnit | '')}>
-                  <option value="" style={{ background: '#1e293b', color: '#e2e8f0' }}>— Selecionar —</option>
+                  <option value="">— Selecionar —</option>
                   {(Object.entries(UNIT_LABELS) as [StockUnit, string][]).map(([k, v]) => (
-                    <option key={k} value={k} style={{ background: '#1e293b', color: '#e2e8f0' }}>{v}</option>
+                    <option key={k} value={k}>{v}</option>
                   ))}
                 </select>
               </div>
@@ -176,10 +176,10 @@ export default function StockItemFormModal({ mode, item, onClose, onSaved }: Pro
             </div>
           </div>
 
-          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+          <div className="flex gap-3 px-6 py-4" style={{ borderTop: '1px solid #e2e8f0' }}>
             <button type="button" onClick={onClose}
               className="flex-1 py-2.5 rounded-lg text-sm font-medium"
-              style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', border: '1px solid rgba(255,255,255,0.1)' }}>
+              style={{ background: '#f8fafc', color: '#475569', border: '1px solid #e2e8f0' }}>
               Cancelar
             </button>
             <button type="submit" disabled={loading}

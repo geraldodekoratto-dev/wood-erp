@@ -60,7 +60,7 @@ export default function SalesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+          <h1 className="text-2xl font-bold flex items-center gap-3" style={{ color: '#0f172a' }}>
             <ShoppingCart size={26} style={{ color: '#00c896' }} />
             Vendas
           </h1>
@@ -72,7 +72,7 @@ export default function SalesPage() {
         <div className="flex items-center gap-3">
           <button onClick={load}
             className="p-2.5 rounded-lg transition-all"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#64748b' }}>
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#64748b' }}>
             <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
           </button>
           <button onClick={() => setShowNew(true)}
@@ -87,45 +87,45 @@ export default function SalesPage() {
       {/* Filters */}
       <div className="flex gap-3 mb-5">
         <div className="relative flex-1 max-w-sm">
-          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#475569' }} />
+          <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" style={{ color: '#64748b' }} />
           <input value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Buscar por cliente, código ou descrição..."
             className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm outline-none"
-            style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0' }} />
+            style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a' }} />
         </div>
         <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}
           className="px-3 py-2.5 rounded-lg text-sm outline-none"
-          style={{ background: '#0f2040', border: '1px solid rgba(255,255,255,0.08)', color: '#e2e8f0', cursor: 'pointer' }}>
+          style={{ background: '#f8fafc', border: '1px solid #e2e8f0', color: '#0f172a', cursor: 'pointer' }}>
           {STATUS_OPTIONS.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
         </select>
       </div>
 
       {/* Table */}
-      <div className="rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
+      <div className="rounded-xl overflow-hidden shadow-sm" style={{ border: '1px solid #e2e8f0' }}>
         <table className="w-full">
           <thead>
-            <tr style={{ background: '#0f2040', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+            <tr style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
               {['Código', 'Cliente', 'Descrição', 'Entrega', 'Valor', 'Pagamento', 'Status'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: '#475569' }}>{h}</th>
+                  style={{ color: '#64748b' }}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {loading ? (
-              <tr><td colSpan={7} className="py-16 text-center" style={{ color: '#475569' }}>
+              <tr><td colSpan={7} className="py-16 text-center" style={{ color: '#64748b' }}>
                 <RefreshCw size={20} className="animate-spin mx-auto mb-2" />Carregando pedidos...
               </td></tr>
             ) : loadError ? (
               <tr><td colSpan={7} className="py-16 text-center">
                 <p className="text-sm font-medium mb-1" style={{ color: '#f87171' }}>Erro ao carregar pedidos</p>
-                <p className="text-xs mb-3" style={{ color: '#475569' }}>{loadError}</p>
+                <p className="text-xs mb-3" style={{ color: '#64748b' }}>{loadError}</p>
                 <button onClick={load} className="text-sm font-medium" style={{ color: '#00c896' }}>Tentar novamente</button>
               </td></tr>
             ) : filtered.length === 0 ? (
               <tr><td colSpan={7} className="py-16 text-center">
-                <ShoppingCart size={32} className="mx-auto mb-3" style={{ color: '#1e3a5f' }} />
-                <p className="text-sm" style={{ color: '#475569' }}>
+                <ShoppingCart size={32} className="mx-auto mb-3" style={{ color: '#cbd5e1' }} />
+                <p className="text-sm" style={{ color: '#64748b' }}>
                   {search || statusFilter ? 'Nenhum pedido encontrado.' : 'Nenhum pedido cadastrado ainda.'}
                 </p>
                 {!search && !statusFilter && (
@@ -138,26 +138,26 @@ export default function SalesPage() {
               <tr key={o.id}
                 onClick={() => navigate(`/vendas/${o.id}`)}
                 style={{
-                  background: i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  background: i % 2 === 0 ? '#ffffff' : '#f8fafc',
+                  borderBottom: '1px solid #f1f5f9',
                   cursor: 'pointer',
                 }}
                 onMouseEnter={e => (e.currentTarget.style.background = 'rgba(0,200,150,0.05)')}
-                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? 'rgba(15,32,64,0.5)' : 'rgba(10,22,40,0.5)')}>
+                onMouseLeave={e => (e.currentTarget.style.background = i % 2 === 0 ? '#ffffff' : '#f8fafc')}>
                 <td className="px-4 py-3.5">
                   <span className="text-xs font-mono font-medium" style={{ color: '#00c896' }}>{o.code}</span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <span className="text-sm font-medium text-white">{o.customer_name}</span>
+                  <span className="text-sm font-medium" style={{ color: '#0f172a' }}>{o.customer_name}</span>
                 </td>
                 <td className="px-4 py-3.5 max-w-xs">
-                  <span className="text-sm truncate block" style={{ color: '#94a3b8' }}>{o.description || '—'}</span>
+                  <span className="text-sm truncate block" style={{ color: '#475569' }}>{o.description || '—'}</span>
                 </td>
                 <td className="px-4 py-3.5">
                   <span className="text-sm" style={{ color: '#64748b' }}>{formatDate(o.delivery_date)}</span>
                 </td>
                 <td className="px-4 py-3.5">
-                  <span className="text-sm font-medium" style={{ color: o.total_value ? '#e2e8f0' : '#475569' }}>
+                  <span className="text-sm font-medium" style={{ color: o.total_value ? '#0f172a' : '#64748b' }}>
                     {formatCurrency(o.total_value)}
                   </span>
                 </td>
