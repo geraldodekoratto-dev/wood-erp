@@ -13,6 +13,8 @@ import SalesPage from '@/modules/vendas/pages/SalesPage'
 import SalesDetailPage from '@/modules/vendas/pages/SalesDetailPage'
 import StockPage from '@/modules/estoque/pages/StockPage'
 import StockItemDetailPage from '@/modules/estoque/pages/StockItemDetailPage'
+import PurchasesPage from '@/modules/compras/pages/PurchasesPage'
+import PurchaseOrderDetailPage from '@/modules/compras/pages/PurchaseOrderDetailPage'
 
 export default function App() {
   return (
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="/vendas/:id" element={<SalesDetailPage />} />
             <Route path="/estoque" element={<StockPage />} />
             <Route path="/estoque/:id" element={<StockItemDetailPage />} />
+            <Route path="/compras" element={<PurchasesPage />} />
+            <Route path="/compras/:id" element={<PurchaseOrderDetailPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
