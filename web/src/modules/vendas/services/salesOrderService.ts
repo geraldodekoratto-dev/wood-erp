@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase'
 import { createProductionOrder, deleteProductionOrder } from '@/modules/pcp/services/productionOrderService'
+import { createFromSalesOrder } from '@/modules/financeiro/services/financialService'
 import type { SalesOrder, CreateSalesOrderInput, UpdateSalesOrderInput, SalesOrderStatus } from '../types'
 
 function generateCode(): string {
@@ -123,7 +124,14 @@ export async function confirmSalesOrder(
       .single()
 
     if (error) throw new Error(error.message)
-    return data as SalesOrder
+    const confirmed = data as SalesOrder
+
+    // Gera lançamento financeiro (Conta a Receber) — falha silenciosa para não bloquear o fluxo
+    await createFromSalesOrder(confirmed).catch(err =>
+      console.warn('[Financeiro] Falha ao criar lançamento de receita:', err)
+    )
+
+    return confirmed
   } catch (err) {
     await deleteProductionOrder(productionOrder.id).catch(() => {})
     throw err

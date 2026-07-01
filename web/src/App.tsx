@@ -15,6 +15,13 @@ import StockPage from '@/modules/estoque/pages/StockPage'
 import StockItemDetailPage from '@/modules/estoque/pages/StockItemDetailPage'
 import PurchasesPage from '@/modules/compras/pages/PurchasesPage'
 import PurchaseOrderDetailPage from '@/modules/compras/pages/PurchaseOrderDetailPage'
+import FinancialPage from '@/modules/financeiro/pages/FinancialPage'
+import FinancialDetailPage from '@/modules/financeiro/pages/FinancialDetailPage'
+import EngineeringPage from '@/modules/engenharia/pages/EngineeringPage'
+import EngineeringDetailPage from '@/modules/engenharia/pages/EngineeringDetailPage'
+import InstallationPage from '@/modules/instalacao/pages/InstallationPage'
+import InstallationDetailPage from '@/modules/instalacao/pages/InstallationDetailPage'
+import ConfiguracoesPage from '@/pages/ConfiguracoesPage'
 
 export default function App() {
   return (
@@ -40,6 +47,13 @@ export default function App() {
             <Route path="/estoque/:id" element={<StockItemDetailPage />} />
             <Route path="/compras" element={<PurchasesPage />} />
             <Route path="/compras/:id" element={<PurchaseOrderDetailPage />} />
+            <Route path="/financeiro" element={<FinancialPage />} />
+            <Route path="/financeiro/:id" element={<FinancialDetailPage />} />
+            <Route path="/engenharia" element={<EngineeringPage />} />
+            <Route path="/engenharia/:id" element={<EngineeringDetailPage />} />
+            <Route path="/instalacao" element={<InstallationPage />} />
+            <Route path="/instalacao/:id" element={<InstallationDetailPage />} />
+            <Route path="/configuracoes" element={<ConfiguracoesPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

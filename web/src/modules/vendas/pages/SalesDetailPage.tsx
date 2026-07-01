@@ -9,7 +9,7 @@ import {
   updateSalesOrderStatus, cancelSalesOrder,
 } from '../services/salesOrderService'
 import type { SalesOrder } from '../types'
-import { STATUS_LABELS, PAYMENT_METHOD_LABELS } from '../types'
+import { PAYMENT_METHOD_LABELS } from '../types'
 import SalesOrderStatusBadge from '../components/SalesOrderStatusBadge'
 import SalesOrderFormModal from '../components/SalesOrderFormModal'
 

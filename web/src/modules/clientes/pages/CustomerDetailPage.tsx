@@ -4,7 +4,7 @@ import {
   ArrowLeft, Pencil, PowerOff, RefreshCw, Users,
   Mail, Phone, Smartphone, MapPin, FileText, Hash
 } from 'lucide-react'
-import { getCustomerById, toggleCustomerStatus, deleteCustomer } from '../services/customerService'
+import { getCustomerById, toggleCustomerStatus } from '../services/customerService'
 import type { Customer } from '../types'
 import { TYPE_LABELS } from '../types'
 import { CustomerTypeBadge, CustomerStatusBadge } from '../components/CustomerBadges'

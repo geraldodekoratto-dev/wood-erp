@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { createFromPurchaseOrder } from '@/modules/financeiro/services/financialService'
 import type {
   PurchaseOrder, PurchaseOrderItem,
   CreatePurchaseOrderInput, PurchaseOrderItemDraft, ReceiveItemInput,
@@ -182,6 +183,8 @@ export async function receiveItems(
 ): Promise<PurchaseOrder> {
   const { data: { user } } = await supabase.auth.getUser()
 
+  let totalReceivedValue = 0
+
   for (const input of inputs) {
     const qty = parseQty(input.quantity_to_receive)
     if (qty <= 0) continue
@@ -200,6 +203,10 @@ export async function receiveItems(
       })
       if (rpcErr) throw new Error(`Erro ao dar entrada no estoque (${input.stock_item_name}): ${rpcErr.message}`)
     }
+
+    // Acumula valor recebido para lançamento financeiro
+    totalReceivedValue += qty * (input.unit_price ?? 0)
+
 
     // Atualiza quantidade recebida no item
     const newReceived = input.quantity_received + qty
@@ -233,7 +240,14 @@ export async function receiveItems(
     .single()
 
   if (error) throw new Error(error.message)
-  return data as PurchaseOrder
+  const order = data as PurchaseOrder
+
+  // Gera lançamento financeiro (Conta a Pagar) — falha silenciosa
+  await createFromPurchaseOrder(order, totalReceivedValue).catch(err =>
+    console.warn('[Financeiro] Falha ao criar lançamento de despesa:', err)
+  )
+
+  return order
 }
 
 export async function deletePurchaseOrder(id: string): Promise<void> {

@@ -55,6 +55,7 @@ export interface ReceiveItemInput {
   quantity_ordered: number
   quantity_received: number
   quantity_to_receive: string
+  unit_price?: number | null
 }
 
 export const STATUS_LABELS: Record<PurchaseOrderStatus, string> = {

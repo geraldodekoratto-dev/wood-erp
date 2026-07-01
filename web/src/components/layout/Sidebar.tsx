@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import {
   LayoutDashboard, Factory, Kanban, ShoppingCart, Package,
-  ShoppingBag, Users, Settings, LogOut, ChevronRight, PanelLeftClose, PanelLeftOpen
+  ShoppingBag, Users, DollarSign, Wrench, CalendarCheck2, Settings, LogOut, ChevronRight, PanelLeftClose, PanelLeftOpen
 } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -14,9 +14,12 @@ const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, to: '/dashboard' },
   { label: 'PCP — Produção', icon: Factory, to: '/pcp' },
   { label: 'Kanban', icon: Kanban, to: '/pcp/kanban' },
+  { label: 'Engenharia', icon: Wrench, to: '/engenharia' },
   { label: 'Vendas', icon: ShoppingCart, to: '/vendas' },
   { label: 'Estoque', icon: Package, to: '/estoque' },
   { label: 'Compras', icon: ShoppingBag, to: '/compras' },
+  { label: 'Financeiro', icon: DollarSign, to: '/financeiro' },
+  { label: 'Instalação', icon: CalendarCheck2, to: '/instalacao' },
   { label: 'Clientes', icon: Users, to: '/clientes' },
 ]
 
@@ -71,62 +74,37 @@ export default function Sidebar({ collapsed, onToggle }: Props) {
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-0.5">
         {navItems.map(item => (
-          item.disabled ? (
-            <div
-              key={item.to}
-              className="flex items-center rounded-lg cursor-not-allowed select-none"
-              style={{
-                color: '#cbd5e1',
-                padding: collapsed ? '10px' : '9px 12px',
-                justifyContent: collapsed ? 'center' : 'flex-start',
-                gap: 10,
-              }}
-              title={collapsed ? item.label : undefined}>
-              <item.icon size={17} style={{ flexShrink: 0 }} />
-              {!collapsed && (
-                <>
-                  <span className="text-sm font-medium">{item.label}</span>
-                  <span
-                    className="ml-auto text-xs px-1.5 py-0.5 rounded"
-                    style={{ background: '#f1f5f9', color: '#94a3b8' }}>
-                    Em breve
-                  </span>
-                </>
-              )}
-            </div>
-          ) : (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              title={collapsed ? item.label : undefined}
-              className={({ isActive }) =>
-                `flex items-center rounded-lg transition-all ${
-                  isActive ? '' : 'hover:bg-slate-50'
-                }`
-              }
-              style={({ isActive }) => ({
-                padding: collapsed ? '10px' : '9px 12px',
-                justifyContent: collapsed ? 'center' : 'flex-start',
-                gap: 10,
-                color: isActive ? '#00a07a' : '#64748b',
-                ...(isActive ? {
-                  background: 'rgba(0,200,150,0.08)',
-                  border: '1px solid rgba(0,200,150,0.2)',
-                } : { border: '1px solid transparent' }),
-              })}>
-              {({ isActive }) => (
-                <>
-                  <item.icon size={17} style={{ flexShrink: 0, color: isActive ? '#00c896' : '#94a3b8' }} />
-                  {!collapsed && (
-                    <>
-                      <span className="text-sm font-medium">{item.label}</span>
-                      {isActive && <ChevronRight size={13} className="ml-auto" style={{ color: '#00c896' }} />}
-                    </>
-                  )}
-                </>
-              )}
-            </NavLink>
-          )
+          <NavLink
+            key={item.to}
+            to={item.to}
+            title={collapsed ? item.label : undefined}
+            className={({ isActive }) =>
+              `flex items-center rounded-lg transition-all ${
+                isActive ? '' : 'hover:bg-slate-50'
+              }`
+            }
+            style={({ isActive }) => ({
+              padding: collapsed ? '10px' : '9px 12px',
+              justifyContent: collapsed ? 'center' : 'flex-start',
+              gap: 10,
+              color: isActive ? '#00a07a' : '#64748b',
+              ...(isActive ? {
+                background: 'rgba(0,200,150,0.08)',
+                border: '1px solid rgba(0,200,150,0.2)',
+              } : { border: '1px solid transparent' }),
+            })}>
+            {({ isActive }) => (
+              <>
+                <item.icon size={17} style={{ flexShrink: 0, color: isActive ? '#00c896' : '#94a3b8' }} />
+                {!collapsed && (
+                  <>
+                    <span className="text-sm font-medium">{item.label}</span>
+                    {isActive && <ChevronRight size={13} className="ml-auto" style={{ color: '#00c896' }} />}
+                  </>
+                )}
+              </>
+            )}
+          </NavLink>
         ))}
       </nav>
 

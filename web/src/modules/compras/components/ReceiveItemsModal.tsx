@@ -39,6 +39,7 @@ export default function ReceiveItemsModal({ order, items, onClose, onReceived }:
         quantity_ordered:    i.quantity_ordered,
         quantity_received:   i.quantity_received,
         quantity_to_receive: quantities[i.id] ?? '0',
+        unit_price:          i.unit_price,
       }))
       .filter(i => {
         const n = parseFloat(i.quantity_to_receive.replace(',', '.'))
